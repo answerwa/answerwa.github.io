@@ -87,7 +87,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-01-13T15:21:46.000Z" itemprop="datePublished">1月 13 2015</time>
-    更新日期:<time datetime="2015-01-13T16:08:34.000Z" itemprop="dateModified">1月 14 2015</time>
+    更新日期:<time datetime="2015-01-14T14:29:25.000Z" itemprop="dateModified">1月 14 2015</time>
     
   </p>
 </header>
@@ -115,6 +115,10 @@
 <p>而在python3中，send时，需要发送bytes(<a href="https://docs.python.org/3/library/socket.html" title="socket" target="_blank" rel="external">socket.send(bytes[, flags])</a>),代码修改起来也比较简单，将’abc’改为b’abc’就可以了，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure>
 
+<p>当然，正规的方法肯定不是这样的，str与bytes的转换关系如下：</p>
+<blockquote>
+<p>str——encode()—&gt;bytes<br>bytes—decode()—&gt;str</p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
