@@ -87,7 +87,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-01-13T15:21:46.000Z" itemprop="datePublished">1月 13 2015</time>
-    更新日期:<time datetime="2015-01-14T14:29:25.000Z" itemprop="dateModified">1月 14 2015</time>
+    更新日期:<time datetime="2015-01-14T14:41:26.000Z" itemprop="dateModified">1月 14 2015</time>
     
   </p>
 </header>
@@ -117,8 +117,11 @@
 
 <p>当然，正规的方法肯定不是这样的，str与bytes的转换关系如下：</p>
 <blockquote>
-<p>str——encode()—&gt;bytes<br>bytes—decode()—&gt;str</p>
+<p>str——-encode()—-&gt;bytes<br>bytes—-decode()—-&gt;str  </p>
 </blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; by1 = b'test'</div><div class="line">&gt;&gt;&gt; type(by1)</div><div class="line">&lt;class 'bytes'&gt;</div><div class="line">&gt;&gt;&gt; str1 = by1.decode('utf-8')</div><div class="line">&gt;&gt;&gt; str1</div><div class="line">'test'</div><div class="line">&gt;&gt;&gt; type(str1)</div><div class="line">&lt;class 'str'&gt;</div><div class="line">&gt;&gt;&gt; by2 = str1.encode('utf-8')</div><div class="line">&gt;&gt;&gt; by2</div><div class="line">b'test'</div><div class="line">&gt;&gt;&gt; type(by2)</div><div class="line">&lt;class 'bytes'&gt;</div></pre></td></tr></table></figure>
+
+<p>另外拓展一个<a href="http://www.ituring.com.cn/article/61192" target="_blank" rel="external">链接</a>吧。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
