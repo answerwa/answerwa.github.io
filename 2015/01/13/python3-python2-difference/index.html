@@ -87,7 +87,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-01-13T15:21:46.000Z" itemprop="datePublished">1月 13 2015</time>
-    更新日期:<time datetime="2015-01-14T14:41:26.000Z" itemprop="dateModified">1月 14 2015</time>
+    更新日期:<time datetime="2015-01-18T13:34:39.000Z" itemprop="dateModified">1月 18 2015</time>
     
   </p>
 </header>
@@ -96,7 +96,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">1.</span> <span class="toc-text">print</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bytes_str"><span class="toc-number">2.</span> <span class="toc-text">bytes str</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">1.</span> <span class="toc-text">print</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bytes_str"><span class="toc-number">2.</span> <span class="toc-text">bytes str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图形编程_tkinter"><span class="toc-number">3.</span> <span class="toc-text">图形编程 tkinter</span></a></li></ol>
 		</div>
 		
 		<p>学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。<br>由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到了，可以记录一下。<br>推荐一下<a href="http://www.liaoxuefeng.com/" title="廖学峰" target="_blank" rel="external">廖学峰老师的网站</a>，git和python都是在这个网站学习的。本篇博客可能会引用部分代码。</p>
@@ -122,6 +122,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; by1 = b'test'</div><div class="line">&gt;&gt;&gt; type(by1)</div><div class="line">&lt;class 'bytes'&gt;</div><div class="line">&gt;&gt;&gt; str1 = by1.decode('utf-8')</div><div class="line">&gt;&gt;&gt; str1</div><div class="line">'test'</div><div class="line">&gt;&gt;&gt; type(str1)</div><div class="line">&lt;class 'str'&gt;</div><div class="line">&gt;&gt;&gt; by2 = str1.encode('utf-8')</div><div class="line">&gt;&gt;&gt; by2</div><div class="line">b'test'</div><div class="line">&gt;&gt;&gt; type(by2)</div><div class="line">&lt;class 'bytes'&gt;</div></pre></td></tr></table></figure>
 
 <p>另外拓展一个<a href="http://www.ituring.com.cn/article/61192" target="_blank" rel="external">链接</a>吧。</p>
+<h2 id="图形编程_tkinter">图形编程 tkinter</h2>
+<p>这个目前用的不多，单纯记录一下：</p>
+<blockquote>
+<p>Tkinter → tkinter<br>tkMessageBox → tkinter.messagebox<br>tkColorChooser → tkinter.colorchooser<br>tkFileDialog → tkinter.filedialog<br>tkCommonDialog → tkinter.commondialog<br>tkSimpleDialog → tkinter.simpledialog<br>tkFont → tkinter.font<br>Tkdnd → tkinter.dnd<br>ScrolledText → tkinter.scrolledtext<br>Tix → tkinter.tix<br>ttk → tkinter.ttk  </p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -169,7 +174,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">1.</span> <span class="toc-text">print</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bytes_str"><span class="toc-number">2.</span> <span class="toc-text">bytes str</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">1.</span> <span class="toc-text">print</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bytes_str"><span class="toc-number">2.</span> <span class="toc-text">bytes str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图形编程_tkinter"><span class="toc-number">3.</span> <span class="toc-text">图形编程 tkinter</span></a></li></ol>
   </div>
 
 <div id="asidepart">
