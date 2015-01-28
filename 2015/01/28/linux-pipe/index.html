@@ -7,12 +7,18 @@
   <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
 <meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
   
-    <title>Hello World | answerwa&#39;s blog</title>
+    <title>linux_pipe | answerwa&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="zhaojunchi">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" content="函数介绍
+定义
+create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
+12#include &amp;lt;unistd.h&amp;gt;int pipe(int pipefd[2]);
+
+参数
+创建管道后，将文件描述词由参数pipefd数组返回。pipefd[0]为管道的读取端；pi">
     
     
     
@@ -79,15 +85,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/12/25/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/01/28/linux-pipe/" title="linux_pipe" itemprop="url">linux_pipe</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="zhaojunchi">zhaojunchi</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-12-25T14:47:48.000Z" itemprop="datePublished">12月 25 2014</time>
-    更新日期:<time datetime="2014-12-25T14:47:48.000Z" itemprop="dateModified">12月 25 2014</time>
+    <time datetime="2015-01-28T13:26:55.000Z" itemprop="datePublished">1月 28 2015</time>
+    更新日期:<time datetime="2015-01-28T13:41:31.000Z" itemprop="dateModified">1月 28 2015</time>
     
   </p>
 </header>
@@ -96,37 +102,37 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-number">1.2.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值"><span class="toc-number">1.3.</span> <span class="toc-text">返回值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">2.</span> <span class="toc-text">测试代码</span></a></li></ol>
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2>
-<h3 id="Create_a_new_post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+		<h2 id="函数介绍">函数介绍</h2>
+<h3 id="定义">定义</h3>
+<p>create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></div><div class="line"><span class="keyword">int</span> pipe(<span class="keyword">int</span> pipefd[<span class="number">2</span>]);</div></pre></td></tr></table></figure>
 
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<h3 id="参数">参数</h3>
+<p>创建管道后，将文件描述词由参数pipefd数组返回。<br>pipefd[0]为管道的读取端；<br>pipefd[1]为管道的写入端。 </p>
+<h3 id="返回值">返回值</h3>
+<p>成功创建后，返回0，错误则返回-1，并将错误原因写入errno中。</p>
+<h2 id="测试代码">测试代码</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;sys/wait.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;assert.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">int</span></div><div class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</div><div class="line">{</div><div class="line">    <span class="keyword">int</span> pipefd[<span class="number">2</span>];</div><div class="line">    pid_t cpid;</div><div class="line">    <span class="keyword">char</span> buf;</div><div class="line"></div><div class="line">    assert(argc == <span class="number">2</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (pipe(pipefd) == -<span class="number">1</span>) {</div><div class="line">        perror(<span class="string">"pipe"</span>);</div><div class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">    }</div><div class="line"></div><div class="line">    cpid = fork();</div><div class="line">    <span class="keyword">if</span> (cpid == -<span class="number">1</span>) {</div><div class="line">        perror(<span class="string">"fork"</span>);</div><div class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (cpid == <span class="number">0</span>) {    <span class="comment">/* Child reads from pipe */</span></div><div class="line">        close(pipefd[<span class="number">1</span>]);          <span class="comment">/* Close unused write end */</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> (read(pipefd[<span class="number">0</span>], &buf, <span class="number">1</span>) &gt; <span class="number">0</span>)</div><div class="line">            write(STDOUT_FILENO, &buf, <span class="number">1</span>);</div><div class="line"></div><div class="line">        write(STDOUT_FILENO, <span class="string">"\n"</span>, <span class="number">1</span>);</div><div class="line">        close(pipefd[<span class="number">0</span>]);</div><div class="line">        _exit(EXIT_SUCCESS);</div><div class="line"></div><div class="line">    } <span class="keyword">else</span> {            <span class="comment">/* Parent writes argv[1] to pipe */</span></div><div class="line">        close(pipefd[<span class="number">0</span>]);          <span class="comment">/* Close unused read end */</span></div><div class="line">        write(pipefd[<span class="number">1</span>], argv[<span class="number">1</span>], <span class="built_in">strlen</span>(argv[<span class="number">1</span>]));</div><div class="line">        close(pipefd[<span class="number">1</span>]);          <span class="comment">/* Reader will see EOF */</span></div><div class="line">        wait(NULL);                <span class="comment">/* Wait for child */</span></div><div class="line">        <span class="built_in">exit</span>(EXIT_SUCCESS);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>补充说明一下：由于wait函数本身是有缺陷的，因此换成<strong>waitpid(cpid, NULL, 0)</strong>比较合适(此代码为manpage中例)。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/pipe/">pipe</a>
+  </div>
 
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2014/12/25/hello-world/" data-title="Hello World | answerwa&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/01/28/linux-pipe/" data-title="linux_pipe | answerwa&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -135,21 +141,21 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/01/04/2014-annual-summary/" title="2014年终总结">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  2014年终总结</span>
+
+<div class="next">
+<a href="/2015/01/20/something-20150120/"  title="《遇见未知的自己》读后感">
+ <strong>NEXT:</strong><br/> 
+ <span>《遇见未知的自己》读后感
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="Hello World" data-thread-key="hello-world" data-author-key="zhaojunchi" data-url="http://yoursite.com/post/hello-world"></div>
+	<div class="ds-thread" data-title="linux_pipe" data-thread-key="linux-pipe" data-author-key="zhaojunchi" data-url="http://yoursite.com/post/linux-pipe"></div>
 	
 </section>
 
@@ -159,7 +165,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-number">1.2.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值"><span class="toc-number">1.3.</span> <span class="toc-text">返回值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">2.</span> <span class="toc-text">测试代码</span></a></li></ol>
   </div>
 
 <div id="asidepart">
