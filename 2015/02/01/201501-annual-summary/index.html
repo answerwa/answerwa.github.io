@@ -7,12 +7,14 @@
   <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
 <meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
   
-    <title>python3和python2的差别 | answerwa&#39;s blog</title>
+    <title>2015年1月终总结 | answerwa&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="zhaojunchi">
     
-    <meta name="description" content="学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到了，可以记录一下。推荐一下廖学峰老">
+    <meta name="description" content="没想到一月份也这么快过去了。从新年开始写让自己学会总结，把平时的学到的，想到的，都要及时记录下来。确实现在也认识到这个问题了，不管是学习，工作还是生活，总结确实是很难，但是真正收获最多的，就是在自己总结的时候。  
+学习
+这个月学习方面确实耽搁了不少，晚上回来没有怎么学习，总是有些烦躁，莫名的压力。">
     
     
     
@@ -79,15 +81,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/13/python3-python2-difference/" title="python3和python2的差别" itemprop="url">python3和python2的差别</a>
+      <a href="/2015/02/01/201501-annual-summary/" title="2015年1月终总结" itemprop="url">2015年1月终总结</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="zhaojunchi">zhaojunchi</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-01-13T15:21:46.000Z" itemprop="datePublished">1月 13 2015</time>
-    更新日期:<time datetime="2015-01-18T13:34:39.000Z" itemprop="dateModified">1月 18 2015</time>
+    <time datetime="2015-02-01T14:33:10.000Z" itemprop="datePublished">2月 1 2015</time>
+    更新日期:<time datetime="2015-02-01T15:32:46.000Z" itemprop="dateModified">2月 1 2015</time>
     
   </p>
 </header>
@@ -96,44 +98,23 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">1.</span> <span class="toc-text">print</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bytes_str"><span class="toc-number">2.</span> <span class="toc-text">bytes str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图形编程_tkinter"><span class="toc-number">3.</span> <span class="toc-text">图形编程 tkinter</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#学习"><span class="toc-number">1.</span> <span class="toc-text">学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作"><span class="toc-number">2.</span> <span class="toc-text">工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生活"><span class="toc-number">3.</span> <span class="toc-text">生活</span></a></li></ol>
 		</div>
 		
-		<p>学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。<br>由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到了，可以记录一下。<br>推荐一下<a href="http://www.liaoxuefeng.com/" title="廖学峰" target="_blank" rel="external">廖学峰老师的网站</a>，git和python都是在这个网站学习的。本篇博客可能会引用部分代码。</p>
-<h2 id="print">print</h2>
-<p>从python3开始，print变成了一个函数，因此最直观的说明就是，在使用它时，需要加括号了。  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">'there are test code'</span></div><div class="line">print(str)</div></pre></td></tr></table></figure>
-
-<p>格式化输出也是同样的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">i = <span class="number">3</span></div><div class="line">print(<span class="string">'this is the %dth blog'</span> % i)</div></pre></td></tr></table></figure>
-
-<p>ps：其实，简单说来，就是在python2的基础上，用括号把它包起来（个人理解）。</p>
-<h2 id="bytes_str">bytes str</h2>
-<p>这是在学习socket时遇到的一个问题。主要是由于在python3中对文本和二进制数据作了明确的区分，文本总是Unicode，由str类型表示，二进制数据则由bytes类型表示。<br>在python2中，connect后，send时，是发送的字符串，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure>
-
-<p>而在python3中，send时，需要发送bytes(<a href="https://docs.python.org/3/library/socket.html" title="socket" target="_blank" rel="external">socket.send(bytes[, flags])</a>),代码修改起来也比较简单，将’abc’改为b’abc’就可以了，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure>
-
-<p>当然，正规的方法肯定不是这样的，str与bytes的转换关系如下：</p>
-<blockquote>
-<p>str——-encode()—-&gt;bytes<br>bytes—-decode()—-&gt;str  </p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; by1 = b'test'</div><div class="line">&gt;&gt;&gt; type(by1)</div><div class="line">&lt;class 'bytes'&gt;</div><div class="line">&gt;&gt;&gt; str1 = by1.decode('utf-8')</div><div class="line">&gt;&gt;&gt; str1</div><div class="line">'test'</div><div class="line">&gt;&gt;&gt; type(str1)</div><div class="line">&lt;class 'str'&gt;</div><div class="line">&gt;&gt;&gt; by2 = str1.encode('utf-8')</div><div class="line">&gt;&gt;&gt; by2</div><div class="line">b'test'</div><div class="line">&gt;&gt;&gt; type(by2)</div><div class="line">&lt;class 'bytes'&gt;</div></pre></td></tr></table></figure>
-
-<p>另外拓展一个<a href="http://www.ituring.com.cn/article/61192" target="_blank" rel="external">链接</a>吧。</p>
-<h2 id="图形编程_tkinter">图形编程 tkinter</h2>
-<p>这个目前用的不多，单纯记录一下：</p>
-<blockquote>
-<p>Tkinter → tkinter<br>tkMessageBox → tkinter.messagebox<br>tkColorChooser → tkinter.colorchooser<br>tkFileDialog → tkinter.filedialog<br>tkCommonDialog → tkinter.commondialog<br>tkSimpleDialog → tkinter.simpledialog<br>tkFont → tkinter.font<br>Tkdnd → tkinter.dnd<br>ScrolledText → tkinter.scrolledtext<br>Tix → tkinter.tix<br>ttk → tkinter.ttk  </p>
-</blockquote>
+		<p>没想到一月份也这么快过去了。从新年开始写让自己学会总结，把平时的学到的，想到的，都要及时记录下来。确实现在也认识到这个问题了，不管是学习，工作还是生活，总结确实是很难，但是真正收获最多的，就是在自己总结的时候。  </p>
+<h2 id="学习">学习</h2>
+<p>这个月学习方面确实耽搁了不少，晚上回来没有怎么学习，总是有些烦躁，莫名的压力。以前不明白为什么那些人会有压力，现在自己感受到了，但是也还是不知道为什么。中午休息的时候，抽时间看了一下张德芬老师的《遇见未知的自己》，文艺点说就是，做了一次心灵的旅行。其实是第一次接触这一类唯心的理论，怎么说呢，求同存异吧，也确实让我自己内心平静了下来。</p>
+<h2 id="工作">工作</h2>
+<p>这个月，工作上突然出现了莫名的压力。这个倒是从来没有过的。我一直都是把工作独立分得比较开的。只在工作的时候考虑工作的事，但是前段时间，不只是工作的八小时觉得压力大，而且每天下班回家也特别愁，所以晚上也不想学习，看书。而且居然有一天早上起床的时候直接就头晕了。。。起不了床。说实话，真的自己也被吓到了。还好后来工作上稍微好点了，身体也调整过来了。还是需要自己及时调整。</p>
+<h2 id="生活">生活</h2>
+<p>一个月没有踢球了，一到周末就在家打游戏。但是前两个礼拜终于忍不住了，周末还是会出去到处逛逛，毕竟还有公园年卡，南京毕竟也是六朝古都，有这么多历史，因此就去逛了六朝博物馆，南京博物院，总统府，明孝陵。<br>最近也一直都在想，什么才是想要的生活，或者活着是为了什么。正好看<strong>奇葩说</strong>也看到一个辩题是，小城房还是大城床以及稳定工作还是追寻梦想。这是个难题，还是慢慢来吧。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/python/">python</a>
+  <span></span> <a href="/tags/总结/">总结</a>
   </div>
 
 
@@ -141,7 +122,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/01/13/python3-python2-difference/" data-title="python3和python2的差别 | answerwa&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/02/01/201501-annual-summary/" data-title="2015年1月终总结 | answerwa&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -150,19 +131,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/01/20/something-20150120/" title="《遇见未知的自己》读后感">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  《遇见未知的自己》读后感</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/01/04/2014-annual-summary/"  title="2014年终总结">
+<a href="/2015/01/28/linux-pipe/"  title="linux_pipe">
  <strong>NEXT:</strong><br/> 
- <span>2014年终总结
+ <span>linux_pipe
 </span>
 </a>
 </div>
@@ -172,7 +145,7 @@
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="python3和python2的差别" data-thread-key="python3-python2-difference" data-author-key="zhaojunchi" data-url="http://yoursite.com/post/python3-python2-difference"></div>
+	<div class="ds-thread" data-title="2015年1月终总结" data-thread-key="201501-annual-summary" data-author-key="zhaojunchi" data-url="http://yoursite.com/post/201501-annual-summary"></div>
 	
 </section>
 
@@ -182,7 +155,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#print"><span class="toc-number">1.</span> <span class="toc-text">print</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bytes_str"><span class="toc-number">2.</span> <span class="toc-text">bytes str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图形编程_tkinter"><span class="toc-number">3.</span> <span class="toc-text">图形编程 tkinter</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#学习"><span class="toc-number">1.</span> <span class="toc-text">学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作"><span class="toc-number">2.</span> <span class="toc-text">工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生活"><span class="toc-number">3.</span> <span class="toc-text">生活</span></a></li></ol>
   </div>
 
 <div id="asidepart">
