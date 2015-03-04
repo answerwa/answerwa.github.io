@@ -7,18 +7,12 @@
   <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
 <meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
   
-    <title>linux_pipe | answerwa&#39;s blog</title>
+    <title>《断舍离》读后感 | answerwa&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="zhaojunchi">
     
-    <meta name="description" content="函数介绍
-定义
-create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
-12#include &amp;lt;unistd.h&amp;gt;int pipe(int pipefd[2]);
-
-参数
-创建管道后，将文件描述词由参数pipefd数组返回。pipefd[0]为管道的读取端；pi">
+    <meta name="description" content="在知乎上看到有人推荐这本书，所以就去下了个pdf(额额~~应该尊重作者，注意版权)，塞进pad，每天中午休息的时候随便看看。这一类的书看多少遍都是没用的，关键还是要自己行动起来，“整理”东西(这里的整理打引号是因为作者在书中重新定义了整理二字)。书中说有三种扔不掉东西的人：逃避现实型，执着过去型，担">
     
     
     
@@ -81,15 +75,15 @@ create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/28/linux-pipe/" title="linux_pipe" itemprop="url">linux_pipe</a>
+      <a href="/2015/03/04/something-20150304/" title="《断舍离》读后感" itemprop="url">《断舍离》读后感</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="zhaojunchi">zhaojunchi</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-01-28T13:26:55.000Z" itemprop="datePublished">1月 28 2015</time>
-    更新日期:<time datetime="2015-01-28T13:41:31.000Z" itemprop="dateModified">1月 28 2015</time>
+    <time datetime="2015-03-04T13:08:27.000Z" itemprop="datePublished">3月 4 2015</time>
+    更新日期:<time datetime="2015-03-04T14:06:36.000Z" itemprop="dateModified">3月 4 2015</time>
     
   </p>
 </header>
@@ -98,29 +92,17 @@ create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-number">1.2.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值"><span class="toc-number">1.3.</span> <span class="toc-text">返回值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">2.</span> <span class="toc-text">测试代码</span></a></li></ol>
+		
 		</div>
 		
-		<h2 id="函数介绍">函数介绍</h2>
-<h3 id="定义">定义</h3>
-<p>create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></div><div class="line"><span class="keyword">int</span> pipe(<span class="keyword">int</span> pipefd[<span class="number">2</span>]);</div></pre></td></tr></table></figure>
-
-<h3 id="参数">参数</h3>
-<p>创建管道后，将文件描述词由参数pipefd数组返回。<br>pipefd[0]为管道的读取端；<br>pipefd[1]为管道的写入端。 </p>
-<h3 id="返回值">返回值</h3>
-<p>成功创建后，返回0，错误则返回-1，并将错误原因写入errno中。</p>
-<h2 id="测试代码">测试代码</h2>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;sys/wait.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;assert.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;stdlib.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;unistd.h&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;string.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">int</span></div><div class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</div><div class="line">{</div><div class="line">    <span class="keyword">int</span> pipefd[<span class="number">2</span>];</div><div class="line">    pid_t cpid;</div><div class="line">    <span class="keyword">char</span> buf;</div><div class="line"></div><div class="line">    assert(argc == <span class="number">2</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (pipe(pipefd) == -<span class="number">1</span>) {</div><div class="line">        perror(<span class="string">"pipe"</span>);</div><div class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">    }</div><div class="line"></div><div class="line">    cpid = fork();</div><div class="line">    <span class="keyword">if</span> (cpid == -<span class="number">1</span>) {</div><div class="line">        perror(<span class="string">"fork"</span>);</div><div class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (cpid == <span class="number">0</span>) {    <span class="comment">/* Child reads from pipe */</span></div><div class="line">        close(pipefd[<span class="number">1</span>]);          <span class="comment">/* Close unused write end */</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> (read(pipefd[<span class="number">0</span>], &buf, <span class="number">1</span>) &gt; <span class="number">0</span>)</div><div class="line">            write(STDOUT_FILENO, &buf, <span class="number">1</span>);</div><div class="line"></div><div class="line">        write(STDOUT_FILENO, <span class="string">"\n"</span>, <span class="number">1</span>);</div><div class="line">        close(pipefd[<span class="number">0</span>]);</div><div class="line">        _exit(EXIT_SUCCESS);</div><div class="line"></div><div class="line">    } <span class="keyword">else</span> {            <span class="comment">/* Parent writes argv[1] to pipe */</span></div><div class="line">        close(pipefd[<span class="number">0</span>]);          <span class="comment">/* Close unused read end */</span></div><div class="line">        write(pipefd[<span class="number">1</span>], argv[<span class="number">1</span>], <span class="built_in">strlen</span>(argv[<span class="number">1</span>]));</div><div class="line">        close(pipefd[<span class="number">1</span>]);          <span class="comment">/* Reader will see EOF */</span></div><div class="line">        wait(NULL);                <span class="comment">/* Wait for child */</span></div><div class="line">        <span class="built_in">exit</span>(EXIT_SUCCESS);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>补充说明一下：由于wait函数本身是有缺陷的，因此换成<strong>waitpid(cpid, NULL, 0)</strong>比较合适(此代码为manpage中例)。</p>
+		<p>在知乎上看到有人推荐这本书，所以就去下了个pdf(额额~~应该尊重作者，注意版权)，塞进pad，每天中午休息的时候随便看看。这一类的书看多少遍都是没用的，关键还是要自己行动起来，“整理”东西(这里的整理打引号是因为作者在书中重新定义了整理二字)。<br>书中说有三种扔不掉东西的人：逃避现实型，执着过去型，担忧未来型。如果非要把我分到这三类中的一种，我估计就算是担忧未来型吧。因为我经常不扔东西的原因就是觉得以后它还能用得着。还记得大学毕业收拾东西的时候，从最下面的柜子里搜出来好多塑料袋，每次一有塑料袋，我就放在里面，结果都没怎么用上。。。。。<br>这本书有点罗嗦，说来说去都在讲一定要扔东西，买真正需要的东西。不过看完了书以后，确实在平时都会下个狠心多扔点不需要的东西，而且平时也会多加注意一下收拾好自己的空间。书中的观点是，当下会用到的东西才是有用的东西；而且还有一个概念是：要将自己作为主体，看这件物品是不是对你有用。因为对于物品来说肯定是有用的。但是对你有没有用，就不得而知了。<br>书中还有一个观点是说通过整理自己的房间，扔掉不需要的垃圾，同时也会扔掉心中的垃圾。书中有个例子是一名丈夫过世十几年的女士，正是因为断舍离，扔掉了丈夫的假牙，才接受了丈夫去世的痛苦，从而走出了这十几年的痛苦生活。<br>ps：表述能力略差啊~不知道该写些什么</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/pipe/">pipe</a>
+  <span></span> <a href="/tags/读后感/">读后感</a>
   </div>
 
 
@@ -128,7 +110,7 @@ create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/01/28/linux-pipe/" data-title="linux_pipe | answerwa&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/03/04/something-20150304/" data-title="《断舍离》读后感 | answerwa&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -137,19 +119,11 @@ create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/02/01/201501-annual-summary/" title="2015年1月终总结">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  2015年1月终总结</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/01/20/something-20150120/"  title="《遇见未知的自己》读后感">
+<a href="/2015/02/03/linux-su-su/"  title="su和su -">
  <strong>NEXT:</strong><br/> 
- <span>《遇见未知的自己》读后感
+ <span>su和su -
 </span>
 </a>
 </div>
@@ -159,7 +133,7 @@ create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="linux_pipe" data-thread-key="linux-pipe" data-author-key="zhaojunchi" data-url="http://yoursite.com/post/linux-pipe"></div>
+	<div class="ds-thread" data-title="《断舍离》读后感" data-thread-key="something-20150304" data-author-key="zhaojunchi" data-url="http://yoursite.com/post/something-20150304"></div>
 	
 </section>
 
@@ -169,7 +143,7 @@ create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-number">1.2.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值"><span class="toc-number">1.3.</span> <span class="toc-text">返回值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">2.</span> <span class="toc-text">测试代码</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
