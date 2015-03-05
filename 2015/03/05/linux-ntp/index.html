@@ -87,7 +87,7 @@ NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两
     </p>
   <p class="article-time">
     <time datetime="2015-03-05T12:08:16.000Z" itemprop="datePublished">3月 5 2015</time>
-    更新日期:<time datetime="2015-03-05T12:27:25.000Z" itemprop="dateModified">3月 5 2015</time>
+    更新日期:<time datetime="2015-03-05T12:56:57.000Z" itemprop="dateModified">3月 5 2015</time>
     
   </p>
 </header>
@@ -96,19 +96,19 @@ NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NTP简介"><span class="toc-number">2.</span> <span class="toc-text">NTP简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntpd服务设置"><span class="toc-number">3.</span> <span class="toc-text">ntpd服务设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntp时间同步"><span class="toc-number">4.</span> <span class="toc-text">ntp时间同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-number">5.</span> <span class="toc-text">其它</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NTP简介"><span class="toc-number">2.</span> <span class="toc-text">NTP简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ntpd服务设置"><span class="toc-number">3.</span> <span class="toc-text">ntpd服务设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ntp时间同步"><span class="toc-number">4.</span> <span class="toc-text">ntp时间同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它"><span class="toc-number">5.</span> <span class="toc-text">其它</span></a></li></ol>
 		</div>
 		
-		<h3 id="背景">背景</h3>
+		<h2 id="背景">背景</h2>
 <p>通过设置本地的ntpd服务，实现本地与服务器时间的同步。<br>此文仅简单说明环境的搭建</p>
-<h3 id="NTP简介">NTP简介</h3>
+<h2 id="NTP简介">NTP简介</h2>
 <p>NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两台电脑的时钟同步化的网络协议。NTP使用UDP端口123作为传输层。它是用作抵销可变延迟的影响。</p>
 <p>简单说明一下：NTP是一种协议；ntpd是系统中的服务，在linux下可以通过/sbin/service ntpd status或/etc/init.d/ntpd status来查看此服务的状态；ntpdate，ntpq，ntptrace等是一系列与ntp相关的命令。</p>
 <p>安装NTP： yum install ntp<br>一般系统上都会有ntp的包，可以提前通过rpm -qa | grep ntp查看机器上是否已经安装ntp。<br>服务操作说明：  </p>
 <blockquote>
 <p>/sbin/service ntpd start //启动服务<br>/sbin/service ntpd stop //关闭服务<br>/sbin/service ntpd restart //重启服务<br>/sbin/service ntpd status //查看服务状态  </p>
 </blockquote>
-<h3 id="ntpd服务设置">ntpd服务设置</h3>
+<h2 id="ntpd服务设置">ntpd服务设置</h2>
 <p>ntpd服务的相关设置文件有以下5个：<br>1)/etc/ntp.conf<br>这个是NTP daemon的主要设文件，也是 NTP 唯一的设定文件。<br>2)/usr /share/zoneinfo/<br>在这个目录下的文件其实是规定了各主要时区的时间设定文件，例如北京地区的时区设定文件在/usr/share/zoneinfo/Asia/Beijing 就是了。这个目录里面的文件与底下要谈的两个文件(clock 与localtime)是有关系的。<br>3)/etc/sysconfig/clock<br>这个文件其实也不包含在NTP 的 daemon 当中，因为这个是 linux 的主要时区设定文件。每次开机后，Linux 会自动的读取这个文件来设定自己系统所默认要显示的时间。<br>4)/etc /localtime<br>这个文件就是“本地端的时间配置文件”。刚刚那个clock 文件里面规定了使用的时间设置文件(ZONE) 为 /usr/share/zoneinfo/Asia/Beijing ，所以说，这就是本地端的时间了，此时， Linux系统就会将Beijing那个文件另存为一份 /etc/localtime文件，所以未来我们的时间显示就会以Beijing那个时间设定文件为准。<br>5)/etc/timezone<br>系统时区文件</p>
 <p>其实主要用到的就只有/etc/ntp.conf，其它文件知道就行了。下面简单说一下/etc/ntp.conf文件的简单写法。<br>1)上层主机设定<br>server [IP | hostname] [prefer]<br>上层主机就是通过server来设定的，设定好上层主机，并保持ntpd服务处于启动状态，这样就能让本机与上层主机保持时间同步了。prefer参数是指当有多个上层主机时，主要通过指定了prefer的上层主机进行时间同步。<br>另外可以通过driftfile来指定用于记录与上层服务器联系时所花费的时间，默认为driftfile /var/lib/ntp/drift。<br>2)权限设定<br>权限设定主要是通过restrict来设定的，语法为：<br>restrict IP mask netmask_IP parameter<br>其中IP可以使具体值，也可以是ip段。netmask_IP是子网掩码。parameter有以下选项：  </p>
 <blockquote>
@@ -117,11 +117,11 @@ NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两
 <p>ps:如果 paramter 完全没有设定，那就表示该 IP (或网域)“没有任何限制”<br>例如：<br>restrict 127.0.0.1　　　 #允许本机任意操作。<br>restrict 192.168.0.1 mask 255.255.255.0 nomodify  #局域网段内可以通过这台NTP Server进行时间同步，但是不能修改服务器时间。 </p>
 <p>另外还有一个fudge，具体如下：<br>fudge IP stratum number，这个设定一般是将自身作为服务器，因此IP一般为127段stratum后的number为服务器层数，最大为16。<br>默认为fudge 127.127.1.0 stratum 10</p>
 <p>其它设置值，建议保持系统默认值。</p>
-<h3 id="ntp时间同步">ntp时间同步</h3>
+<h2 id="ntp时间同步">ntp时间同步</h2>
 <p>从ntpd服务设置中可以知道，设置好ntp.conf文件后，保持ntpd服务处于启动状态，机器就会与上层服务器进行时间同步了。现在主要介绍一些时间同步的命令。特别说明一下，想要通过命令进行时间同步时，需关闭ntpd服务。</p>
 <p>1)ntpdate IP<br>直接通过ntpdate加上想要进行时间同步的服务器IP，就能获得服务器上的时间，并设置到本机系统中。<br>2)rdate -s IP<br>与ntpdate类似，也是获得服务器上的时间，并设置到本机系统中。如果不加-s则仅是打印出服务器时间。 </p>
 <p>说明一下，这两条命令以及上面通过ntpd的时间同步，仅仅是将时间设置到了系统中，如果想要设置到硬件时钟中，还需要hwclock。<br>因此，如果想要设置本机的时间同步，可以将命令写入到crontab中，这样系统就会定期执行这两条命令实现时间同步了。不过通过查看网上资料，说是通过ntpdate来调节时间，时间会产生跃变，而通过ntpd服务来进行时间同步，是通过调节时钟频率渐变调节时间的。因此不推荐使用ntpdate + crontab来做时间同步。不过，在我测试时发现，ntpd服务进行时间同步时，也是通过跃变调节时间的。也有可能是我的设置有些问题(后来调查得知，需要在文件/etc/sysconfig/ntpd中加入-x 参数,变成: OPTIONS=”-U ntp -x -p /var/run/ntpd.pid”，这样ntpd就能实现渐变调整时间)。</p>
-<h3 id="其它">其它</h3>
+<h2 id="其它">其它</h2>
 <p>关于ntp的环境搭建是一件很复杂的事情，我也没有完全搞懂。这篇文章只是介绍了一些最简单的设置方法，通过这些设置，能够实现本地机器与服务器的时间同步。</p>
   
 	</div>
@@ -178,7 +178,7 @@ NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NTP简介"><span class="toc-number">2.</span> <span class="toc-text">NTP简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntpd服务设置"><span class="toc-number">3.</span> <span class="toc-text">ntpd服务设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ntp时间同步"><span class="toc-number">4.</span> <span class="toc-text">ntp时间同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-number">5.</span> <span class="toc-text">其它</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NTP简介"><span class="toc-number">2.</span> <span class="toc-text">NTP简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ntpd服务设置"><span class="toc-number">3.</span> <span class="toc-text">ntpd服务设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ntp时间同步"><span class="toc-number">4.</span> <span class="toc-text">ntp时间同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它"><span class="toc-number">5.</span> <span class="toc-text">其它</span></a></li></ol>
   </div>
 
 <div id="asidepart">

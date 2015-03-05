@@ -86,7 +86,7 @@ crond是linux用来定期执行程序的服务。当安装完成操作系统之�
     </p>
   <p class="article-time">
     <time datetime="2015-03-05T12:28:19.000Z" itemprop="datePublished">3月 5 2015</time>
-    更新日期:<time datetime="2015-03-05T12:52:52.000Z" itemprop="dateModified">3月 5 2015</time>
+    更新日期:<time datetime="2015-03-05T12:56:23.000Z" itemprop="dateModified">3月 5 2015</time>
     
   </p>
 </header>
@@ -95,12 +95,12 @@ crond是linux用来定期执行程序的服务。当安装完成操作系统之�
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crond简介"><span class="toc-number">2.</span> <span class="toc-text">crond简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用权限"><span class="toc-number">3.</span> <span class="toc-text">使用权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crontab命令详解"><span class="toc-number">4.</span> <span class="toc-text">crontab命令详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crontab具体使用(个人执行)"><span class="toc-number">5.</span> <span class="toc-text">crontab具体使用(个人执行)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#添加crontab文件"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">添加crontab文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#列出crontab文件"><span class="toc-number">5.0.0.2.</span> <span class="toc-text">列出crontab文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除crontab文件"><span class="toc-number">5.0.0.3.</span> <span class="toc-text">删除crontab文件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它一些想说的"><span class="toc-number">6.</span> <span class="toc-text">其它一些想说的</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#环境变量"><span class="toc-number">6.0.0.1.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#系统执行crontab"><span class="toc-number">6.0.0.2.</span> <span class="toc-text">系统执行crontab</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#邮件相关"><span class="toc-number">6.0.0.3.</span> <span class="toc-text">邮件相关</span></a></li></ol></li></ol></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond简介"><span class="toc-number">2.</span> <span class="toc-text">crond简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用权限"><span class="toc-number">3.</span> <span class="toc-text">使用权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crontab命令详解"><span class="toc-number">4.</span> <span class="toc-text">crontab命令详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crontab具体使用(个人执行)"><span class="toc-number">5.</span> <span class="toc-text">crontab具体使用(个人执行)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加crontab文件"><span class="toc-number">5.1.</span> <span class="toc-text">添加crontab文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出crontab文件"><span class="toc-number">5.2.</span> <span class="toc-text">列出crontab文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除crontab文件"><span class="toc-number">5.3.</span> <span class="toc-text">删除crontab文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它一些想说的"><span class="toc-number">6.</span> <span class="toc-text">其它一些想说的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量"><span class="toc-number">6.1.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统执行crontab"><span class="toc-number">6.2.</span> <span class="toc-text">系统执行crontab</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#邮件相关"><span class="toc-number">6.3.</span> <span class="toc-text">邮件相关</span></a></li></ol></li></ol>
 		</div>
 		
-		<h3 id="背景">背景</h3>
+		<h2 id="背景">背景</h2>
 <p>前段时间由于工作需要，所以比较系统的调查了一下cron，现在总结分享一下。</p>
-<h3 id="crond简介">crond简介</h3>
+<h2 id="crond简介">crond简介</h2>
 <p>crond是linux用来定期执行程序的服务。当安装完成操作系统之后，默认便会启动此服务。crond每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。而linux任务调度的工作主要分为以下两类：</p>
 <ul>
 <li>系统执行的工作：系统周期性所要执行的工作，如备份系统数据、清理缓存。  </li>
@@ -111,19 +111,19 @@ crond是linux用来定期执行程序的服务。当安装完成操作系统之�
 <blockquote>
 <p>/sbin/service crond start //启动服务<br>/sbin/service crond stop //关闭服务<br>/sbin/service crond restart //重启服务<br>/sbin/service crond reload //重新载入配置<br>/sbin/service crond status //查看服务状态  </p>
 </blockquote>
-<h3 id="使用权限">使用权限</h3>
+<h2 id="使用权限">使用权限</h2>
 <p>控制crond的使用权限，主要是两个文件：  </p>
 <ul>
 <li>/etc/cron.allow  </li>
 <li>/etc/cron.deny  </li>
 </ul>
 <p>cron.allow的优先级比cron.deny的优先级高。也就是说当两个文件都存在时，首先根据cron.allow的内容进行判断。<br>当cron.allow存在时，要想使用crond服务，user必须在该文件中列出；当cron.allow不存在而cron.deny存在时，要想使用crond服务，user不能出现在该文件中；若两个文件都不存在，则只有root能使用crond服务。<br>因此，一般的使用情况是，不要cron.allow文件，放一个空的cron.deny文件在/etc下，这样所有用户都可以使用crond服务，若需要禁止某个用户使用，则可以直接在cron.deny文件中添加。</p>
-<h3 id="crontab命令详解">crontab命令详解</h3>
+<h2 id="crontab命令详解">crontab命令详解</h2>
 <blockquote>
 <p>crontab [-u user] file (use file install user’s crontab)<br>crontab [-u user] -e (edit user’s crontab)<br>crontab [-u user] -l (list user’s crontab)<br>crontab [-u user] -r (delete user’s crontab)<br>crontab [-u user] -i (prompt before deleting user’s crontab）<br>crontab [-u user] -s (selinux context)  </p>
 </blockquote>
 <p>说明一下：当普通用户使用crontab命令时，是不需要也不能加[-u user]的，这个是给root使用的，root可以通过[-u user]操作其他用户的crontab。root用户查看自己的crontab也是不用加[-u root]的，当然你非要加也是可以的。</p>
-<h3 id="crontab具体使用(个人执行)">crontab具体使用(个人执行)</h3>
+<h2 id="crontab具体使用(个人执行)">crontab具体使用(个人执行)</h2>
 <p>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：</p>
 <p>minute   hour   day   month   week   command</p>
 <p>具体说明一下：</p>
@@ -139,25 +139,25 @@ crond是linux用来定期执行程序的服务。当安装完成操作系统之�
 <p>分析一下：  </p>
 <p>* 表示忽略，也就是都所有值都匹配<br>7-23/2 表示从23点到7点，每隔两小时<br>15,18 表示每个月的15号和18  </p>
 </blockquote>
-<h6 id="添加crontab文件">添加crontab文件</h6>
+<h3 id="添加crontab文件">添加crontab文件</h3>
 <p>  一般情况下使用crontab -e这个命令，会通过编辑器打开crontab文件，然后按照上面提到的格式输入，一行代表一个周期性指令(ps:编辑器由环境变量$EDITOR指定)。</p>
 <p>  另外一个比较常用的方法是将想要写入crontab中的内容先写入另外一个文件中(比如cronfile)，再使用crontab cronfile，就能将cronfile中的内容替换到之前提到的/var/spool/cron/user中。</p>
 <p>  上面两个是比较常用的方法，再说说不太常用的方法：<br>  既然crontab的文件是/var/spool/cron/user，那么我们可以直接echo “<em> 23-7/2 </em> <em> </em> ls /etc” &gt; /var/spool/cron/user，当然，必须使用root权限才可以。</p>
 <p>  另外，还有一种方法就是echo “<em> 7-23/2 </em> <em> </em> ls /etc” | crontab，这种方法的原理其实与crontab cronfile相同。</p>
-<h6 id="列出crontab文件">列出crontab文件</h6>
+<h3 id="列出crontab文件">列出crontab文件</h3>
 <p>  直接使用crontab -l，就能输出当前用户的crontab中的内容。顺带提一下，有时候，可能需要部分修改crontab中的内容，这时可以使用crontab -l &gt; cronfile，在cronfile中做出对应的修改，再使用crontab cronfile添加crontab文件。</p>
-<h6 id="删除crontab文件">删除crontab文件</h6>
+<h3 id="删除crontab文件">删除crontab文件</h3>
 <p>  直接使用crontab -r，就能删除当前用户的crontab。</p>
-<h3 id="其它一些想说的">其它一些想说的</h3>
-<h6 id="环境变量">环境变量</h6>
+<h2 id="其它一些想说的">其它一些想说的</h2>
+<h3 id="环境变量">环境变量</h3>
 <p>  除了上面说的$EDITOR是用来指定打开crontab的编辑器以外，还想提到的是在crontab中执行脚本的问题。</p>
 <p>有时候想要在crontab中固定时间执行某个自己编写的脚本，可能会发现执行不成功，但是自己手动执行又是可以的，这个时候多半就是环境变量的问题了，需要修改一下crontab中的内容，在想要执行的脚本前，加上source ~/.bashrc，比如想要执行的脚本名为script，那么在crontab中就可以写为<em> 7-23/2 </em> <em> </em> source ~/.bashrc &amp;&amp; script</p>
-<h6 id="系统执行crontab">系统执行crontab</h6>
+<h3 id="系统执行crontab">系统执行crontab</h3>
 <p>  前面也说的，crontab有系统执行和个人执行之分，文件存放的位置也不同，当然，写法有些差别，可以看看系统执行的crontab，也就是/etc/crontab。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SHELL=/bin/bash</div><div class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</div><div class="line">MAILTO=root</div><div class="line">HOME=/</div><div class="line"></div><div class="line"><span class="comment"># run-parts</span></div><div class="line"><span class="number">01</span> * * * * root run-parts /etc/cron.hourly</div><div class="line"><span class="number">02</span> <span class="number">4</span> * * * root run-parts /etc/cron.daily</div><div class="line"><span class="number">22</span> <span class="number">4</span> * * <span class="number">0</span> root run-parts /etc/cron.weekly</div><div class="line"><span class="number">42</span> <span class="number">4</span> <span class="number">1</span> * * root run-parts /etc/cron.monthly</div></pre></td></tr></table></figure>
 
 <p>  与个人执行的crontab不同的是，首先指定了一些环境变量，其次多了root和run-parts两项。先说root，因为个人执行的crontab肯定是自己使用，因此不用指定这一项，而系统执行的crontab，需要指定是通过哪个用户来执行后面的指令的；对于run-parts，这个参数是执行后面指定的文件夹中的所有脚本，个人执行的crontab中，也是可以使用的。</p>
-<h6 id="邮件相关">邮件相关</h6>
+<h3 id="邮件相关">邮件相关</h3>
 <p>  每次crontab执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此，将每条任务进行重定向处理非常重要。</p>
   
 	</div>
@@ -206,7 +206,7 @@ crond是linux用来定期执行程序的服务。当安装完成操作系统之�
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crond简介"><span class="toc-number">2.</span> <span class="toc-text">crond简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用权限"><span class="toc-number">3.</span> <span class="toc-text">使用权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crontab命令详解"><span class="toc-number">4.</span> <span class="toc-text">crontab命令详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crontab具体使用(个人执行)"><span class="toc-number">5.</span> <span class="toc-text">crontab具体使用(个人执行)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#添加crontab文件"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">添加crontab文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#列出crontab文件"><span class="toc-number">5.0.0.2.</span> <span class="toc-text">列出crontab文件</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除crontab文件"><span class="toc-number">5.0.0.3.</span> <span class="toc-text">删除crontab文件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它一些想说的"><span class="toc-number">6.</span> <span class="toc-text">其它一些想说的</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#环境变量"><span class="toc-number">6.0.0.1.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#系统执行crontab"><span class="toc-number">6.0.0.2.</span> <span class="toc-text">系统执行crontab</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#邮件相关"><span class="toc-number">6.0.0.3.</span> <span class="toc-text">邮件相关</span></a></li></ol></li></ol></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond简介"><span class="toc-number">2.</span> <span class="toc-text">crond简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用权限"><span class="toc-number">3.</span> <span class="toc-text">使用权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crontab命令详解"><span class="toc-number">4.</span> <span class="toc-text">crontab命令详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crontab具体使用(个人执行)"><span class="toc-number">5.</span> <span class="toc-text">crontab具体使用(个人执行)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加crontab文件"><span class="toc-number">5.1.</span> <span class="toc-text">添加crontab文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出crontab文件"><span class="toc-number">5.2.</span> <span class="toc-text">列出crontab文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除crontab文件"><span class="toc-number">5.3.</span> <span class="toc-text">删除crontab文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它一些想说的"><span class="toc-number">6.</span> <span class="toc-text">其它一些想说的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量"><span class="toc-number">6.1.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统执行crontab"><span class="toc-number">6.2.</span> <span class="toc-text">系统执行crontab</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#邮件相关"><span class="toc-number">6.3.</span> <span class="toc-text">邮件相关</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
