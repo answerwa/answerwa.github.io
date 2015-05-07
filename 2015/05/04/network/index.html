@@ -12,11 +12,11 @@
     
     <meta name="author" content="zhaojunchi">
     
-    <meta name="description" content="第二份工作，网络安全，做waf。因此，不得不在平时多多补充网络方面的知识。回想大学期间，网络方面的课程，基本上是虚度的。。。。
+    <meta name="description" content="这段时间接触到了好多网络方面的知识，都是些基础知识，不知道就是不知道，因此不得不在平时多多补充网络方面的知识。
 现在把平时新学到的知识记录在这里。
 域名和别名
 百度百科有个简单的解释。按照我的理解就是：  
-假设有一台服务器的ip是192.168.1.1，它可以有www.web1.c">
+假设有一台服务器的ip是192.168.1.1，它可以有www.web1.com，www.w">
     
     
     
@@ -87,7 +87,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-05-04T09:12:14.000Z" itemprop="datePublished">5月 4 2015</time>
-    更新日期:<time datetime="2015-05-06T10:19:09.000Z" itemprop="dateModified">5月 6 2015</time>
+    更新日期:<time datetime="2015-05-07T05:34:31.000Z" itemprop="dateModified">5月 7 2015</time>
     
   </p>
 </header>
@@ -96,15 +96,15 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域名和别名"><span class="toc-number">1.</span> <span class="toc-text">域名和别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN相关"><span class="toc-number">2.</span> <span class="toc-text">VLAN相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN概念"><span class="toc-number">2.1.</span> <span class="toc-text">VLAN概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由"><span class="toc-number">2.2.</span> <span class="toc-text">路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN链接"><span class="toc-number">2.3.</span> <span class="toc-text">VLAN链接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Access_Link（访问链接）"><span class="toc-number">2.3.1.</span> <span class="toc-text">Access Link（访问链接）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trunk_Link（汇聚链接）"><span class="toc-number">2.3.2.</span> <span class="toc-text">Trunk Link（汇聚链接）</span></a></li></ol></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域名和别名"><span class="toc-number">1.</span> <span class="toc-text">域名和别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN相关"><span class="toc-number">2.</span> <span class="toc-text">VLAN相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN概念"><span class="toc-number">2.1.</span> <span class="toc-text">VLAN概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由"><span class="toc-number">2.2.</span> <span class="toc-text">路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN链接"><span class="toc-number">2.3.</span> <span class="toc-text">VLAN链接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Access_Link（访问链接）"><span class="toc-number">2.3.1.</span> <span class="toc-text">Access Link（访问链接）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trunk_Link（汇聚链接）"><span class="toc-number">2.3.2.</span> <span class="toc-text">Trunk Link（汇聚链接）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN间通信"><span class="toc-number">2.4.</span> <span class="toc-text">VLAN间通信</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>第二份工作，网络安全，做waf。因此，不得不在平时多多补充网络方面的知识。回想大学期间，网络方面的课程，基本上是虚度的。。。。</p>
+		<p>这段时间接触到了好多网络方面的知识，都是些基础知识，不知道就是不知道，因此不得不在平时多多补充网络方面的知识。</p>
 <p>现在把平时新学到的知识记录在这里。</p>
 <h2 id="域名和别名">域名和别名</h2>
 <p><a href="http://baike.baidu.com/link?url=r5FtzXC7Mtd2D46xtLMrrA3e0iVyjN7Q9oyAxQBJsHqHzMt_bVmrVRr9vZvivK3R#5" target="_blank" rel="external">百度百科</a>有个简单的解释。<br>按照我的理解就是：  </p>
 <p>假设有一台服务器的ip是192.168.1.1，它可以有www.web1.com，www.web2.com，www.web3.com三个域名；也可以有www.web1.com一个域名，同时有www.web2.com，www.web3.com两个作为www.web1.com这个域名的别名。<br>这两种情况相同的地方是，访问这三个url，都是访问192.168.1.1这台服务器。不同点是如果服务器的ip变成了192.168.1.2，那么第一种情况，需要修改web1，web2，web3，三个域名都需要更改；而第二种情况就只需修改web1就行了。</p>
-<p>第一种情况就像当于是三个（web1,web2,web3）指向同一地址的指针；第二种情况是一个（web1）指向地址的指针和两个（web2，web3）指向指针的指针。</p>
+<p>第一种情况就相当于是三个（web1,web2,web3）指向同一地址的指针；第二种情况是一个（web1）指向地址的指针和两个（web2，web3）指向指针的指针。</p>
 <h2 id="VLAN相关">VLAN相关</h2>
 <p>此小节参考<a href="http://blog.csdn.net/phunxm/article/details/9498829" target="_blank" rel="external">VLAN原理详解</a></p>
 <h3 id="VLAN概念">VLAN概念</h3>
@@ -121,9 +121,20 @@
 <p>访问链接（Access Link）<br>汇聚链接（Trunk Link）</p>
 </blockquote>
 <h4 id="Access_Link（访问链接）">Access Link（访问链接）</h4>
-<p>同一台交换机，分为静态VLAN和动态VLAN。<br>静态VLAN是通过设置交换机的不同端口为不同的VLAN。<br>动态VLAN是根据客户端的MAC或ip或用户名设置为不同的VLAN。</p>
+<p>同一台交换机，分为静态VLAN和动态VLAN。<br>静态VLAN是通过设置交换机的不同端口为不同的VLAN。 如下图（图片均是盗用参考链接处）：<br><img src="http://img.blog.csdn.net/20130726174909406" alt="access_link_port" title="access_link_port"><br>动态VLAN是根据客户端的MAC或ip或用户名设置为不同的VLAN。如下图（图片均是盗用参考链接处）：</p>
+<p>基于mac：<br><img src="http://img.blog.csdn.net/20130726174941218" alt="access_link_mac" title="access_link_mac">    </p>
+<p>基于ip：<br><img src="http://img.blog.csdn.net/20130726175015406" alt="access_link_ip" title="access_link_ip"></p>
+<p>至于基于用户，就是根据连上的用户的用户名判断属于哪个VLAN。</p>
 <h4 id="Trunk_Link（汇聚链接）">Trunk Link（汇聚链接）</h4>
-<p>交换机间设置相同的VLAN。<br>交换机间用一个端口设定为汇聚链接，也就是用来传输VLAN的信息。其它端口设置具体的VLAN号。</p>
+<p>交换机间设置相同的VLAN。<br>交换机间用一个端口设定为汇聚链接，也就是用来传输VLAN的信息。其它端口设置具体的VLAN号。<br><img src="http://img.blog.csdn.net/20130726175217593" alt="trunk_link" title="trunk_link"></p>
+<h3 id="VLAN间通信">VLAN间通信</h3>
+<p>参考文章中写得很详细，这边就按照我自己的理解来阐述一下：<br><img src="http://img.blog.csdn.net/20130726175659000" alt="vlan_communication" title="vlan_communication"><br>比如要从A发送信息到C。  </p>
+<ol>
+<li>A从目标ip中判断C不在同一网段，因此会通过<a href="http://baike.baidu.com/link?url=v4lWRw5HOygXoig4vh67Yp71bkgv6w5nYxv4D8g_FXEDO5EHwM1QoV_V81RUJrD5jQ6GSTYK_7bkDXTwyOQw_rpGy-7tc21QzBpP0vrLz5S" title="ARP" target="_blank" rel="external">ARP</a>获取路由器的MAC地址。再将包含源MAC、源IP及目标IP的数据发送到路由器。交换机1口收到后，转到6口（汇聚链路），附上红色的VLAN识别信息（比如VLAN10），发送给路由器。  </li>
+<li>路由器收到数据帧后，确认VLAN的识别信息，交由属于红色VLAN的子接口接收。  </li>
+<li>由内部的<strong>路由表</strong>及目标IP，判断向哪里中继。交由蓝色VLAN子接口转发，附上蓝色的VLAN识别信息，并将目标MAC改为C的MAC（现在的目标MAC是路由器的MAC），发送到交换机。   </li>
+<li>交换机收到数据帧后，通过VLAN识别信息判断是蓝色VLAN，通过目标MAC判断为3口，因此将VLAN识别信息去掉后，发送到3口，这样C就收到了A的数据。</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -171,7 +182,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域名和别名"><span class="toc-number">1.</span> <span class="toc-text">域名和别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN相关"><span class="toc-number">2.</span> <span class="toc-text">VLAN相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN概念"><span class="toc-number">2.1.</span> <span class="toc-text">VLAN概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由"><span class="toc-number">2.2.</span> <span class="toc-text">路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN链接"><span class="toc-number">2.3.</span> <span class="toc-text">VLAN链接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Access_Link（访问链接）"><span class="toc-number">2.3.1.</span> <span class="toc-text">Access Link（访问链接）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trunk_Link（汇聚链接）"><span class="toc-number">2.3.2.</span> <span class="toc-text">Trunk Link（汇聚链接）</span></a></li></ol></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域名和别名"><span class="toc-number">1.</span> <span class="toc-text">域名和别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN相关"><span class="toc-number">2.</span> <span class="toc-text">VLAN相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN概念"><span class="toc-number">2.1.</span> <span class="toc-text">VLAN概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由"><span class="toc-number">2.2.</span> <span class="toc-text">路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN链接"><span class="toc-number">2.3.</span> <span class="toc-text">VLAN链接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Access_Link（访问链接）"><span class="toc-number">2.3.1.</span> <span class="toc-text">Access Link（访问链接）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Trunk_Link（汇聚链接）"><span class="toc-number">2.3.2.</span> <span class="toc-text">Trunk Link（汇聚链接）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN间通信"><span class="toc-number">2.4.</span> <span class="toc-text">VLAN间通信</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
