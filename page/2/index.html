@@ -95,13 +95,16 @@
 
 
 
+<meta name="description" content="Only The Strong Survive">
 <meta property="og:type" content="website">
 <meta property="og:title" content="answerwa">
 <meta property="og:url" content="https://answerwa.github.io/page/2/index.html">
 <meta property="og:site_name" content="answerwa">
+<meta property="og:description" content="Only The Strong Survive">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="answerwa">
+<meta name="twitter:description" content="Only The Strong Survive">
 
 
 
@@ -306,24 +309,19 @@
       
         
           
-            <p>学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。<br>由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到了，可以记录一下。<br>推荐一下<a href="http://www.liaoxuefeng.com/" title="廖学峰" target="_blank" rel="external">廖学峰老师的网站</a>，git和python都是在这个网站学习的。本篇博客可能会引用部分代码。</p>
-<h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><p>从python3开始，print变成了一个函数，因此最直观的说明就是，在使用它时，需要加括号了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">'there are test code'</span></div><div class="line">print(str)</div></pre></td></tr></table></figure></p>
-<p>格式化输出也是同样的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">i = <span class="number">3</span></div><div class="line">print(<span class="string">'this is the %dth blog'</span> % i)</div></pre></td></tr></table></figure></p>
-<p>ps：其实，简单说来，就是在python2的基础上，用括号把它包起来（个人理解）。</p>
-<h2 id="bytes-str"><a href="#bytes-str" class="headerlink" title="bytes str"></a>bytes str</h2><p>这是在学习socket时遇到的一个问题。主要是由于在python3中对文本和二进制数据作了明确的区分，文本总是Unicode，由str类型表示，二进制数据则由bytes类型表示。<br>在python2中，connect后，send时，是发送的字符串，代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure></p>
-<p>而在python3中，send时，需要发送bytes(<a href="https://docs.python.org/3/library/socket.html" title="socket" target="_blank" rel="external">socket.send(bytes[, flags])</a>),代码修改起来也比较简单，将’abc’改为b’abc’就可以了，代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure></p>
-<p>当然，正规的方法肯定不是这样的，str与bytes的转换关系如下：</p>
-<blockquote>
-<p>str—–encode()—&gt;bytes<br>bytes—decode()—&gt;str  </p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>by1 = <span class="string">b'test'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(by1)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bytes</span>'&gt;</span></div><div class="line">&gt;&gt;&gt; str1 = by1.decode('utf-8')</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>str1</div><div class="line"><span class="string">'test'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(str1)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">str</span>'&gt;</span></div><div class="line">&gt;&gt;&gt; by2 = str1.encode('utf-8')</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>by2</div><div class="line"><span class="string">b'test'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(by2)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bytes</span>'&gt;</span></div></pre></td></tr></table></figure>
-<p>另外拓展一个<a href="http://www.ituring.com.cn/article/61192" target="_blank" rel="external">链接</a>吧。</p>
-<h2 id="图形编程-tkinter"><a href="#图形编程-tkinter" class="headerlink" title="图形编程 tkinter"></a>图形编程 tkinter</h2><p>这个目前用的不多，单纯记录一下：</p>
-<blockquote>
-<p>Tkinter → tkinter<br>tkMessageBox → tkinter.messagebox<br>tkColorChooser → tkinter.colorchooser<br>tkFileDialog → tkinter.filedialog<br>tkCommonDialog → tkinter.commondialog<br>tkSimpleDialog → tkinter.simpledialog<br>tkFont → tkinter.font<br>Tkdnd → tkinter.dnd<br>ScrolledText → tkinter.scrolledtext<br>Tix → tkinter.tix<br>ttk → tkinter.ttk  </p>
-</blockquote>
-
-          
+          学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到了，可以记录一下。推荐一下廖学峰老师的网站，git和python都是在这个网站学习的。本篇博客可能会引用部分代码。
+print从python3开始，print变成了一个函数，因此最直观的说明就是，在使用它时，需要加括号了。12str = 'there are test code'print(str)
+格式化输出也是同样的。12i = 3print('this is the %dth blog' % i)
+ps：其实，简单说来，就是在python2的基础上，用括号把它包起来（个人理解）。
+bytes str这是在学习socket时遇到的一个问题。主要是由于在python3中对文本和二进制数据作了明确的区分，文本总是Unicode，由str类型表示，二进制数据则由bytes类型表示。在python2中，connect后，send
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/01/13/python3-python2-difference/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -441,21 +439,21 @@
       
         
           
-            <p>2014已经悄悄过去了，是时候对这一年做个总结了。<br>2014年是崭新的一年，是毕业后第一个完整的工作年，在这一年里，许多想法都在发生着改变，也在尝试去接触许多新的知识。  </p>
-<p>##读书<br>今年从8月份开始突然有了读书的习惯，看了许多书，但是却没有写过读书笔记，以后要养成写读书笔记的习惯。现在把今年读过的书简单罗列一下：</p>
-<ul>
-<li><a href="http://www.duokan.com/book/45261" title="1984" target="_blank" rel="external">《1984》</a><br>这本书在网上火得一塌糊涂，豆瓣评分也特别高，因此不得不尝试着去看看。说实话，看到大概一半的时候，我确实都不知道在讲些什么， 感觉一直是在营造一种比较黑暗，恐怖的氛围。看到温斯顿被洗脑时，那种无助，直到最后他也变得麻木起来。确实有些瘆得慌。</li>
-<li><a href="http://www.duokan.com/book/426" title="三国演义" target="_blank" rel="external">《三国演义》</a><br>这本书没什么好说的，以前一直想看，尝试了三次，都半途而废了，这次总算是看完了，算是如愿了。 <strong>夫英雄者，胸怀大志，腹有良谋，有包藏宇宙之机，吞吐天地之志者也。</strong></li>
-<li><a href="http://www.duokan.com/book/73061" title="一句顶一万句" target="_blank" rel="external">《一句顶一万句》</a><br>这本书是在看 <strong>青年中国说</strong> 时，撒贝宁推荐的。讲了一些很简单的故事，刻画人物的心理。只能说是感同身受。也让我愈发坚定自己的想法，不管是交朋友，还是找对象，一定不能将就，一定要找对人。</li>
-<li><a href="http://book.douban.com/subject/10561367" title="head first python" target="_blank" rel="external">《head first python》</a><br>这本书适合python入门后看。不过后小半部分的东西感觉讲的不是很清楚。  </li>
-<li><a href="http://book.douban.com/subject/21317828/" title="征服C指针" target="_blank" rel="external">《征服C指针》</a></li>
-<li><a href="http://billie66.github.io/TLCL/book/zh/" title="TLCL" target="_blank" rel="external">《the linux command line》</a><br>这两本书都没看完。。。</li>
-</ul>
-<p>##语言<br>今年新学了python，学得还是挺起劲的，因此准备长期学习下去，同时也接触了django，但是由于从来都没有接触过这方面的知识，因此学习起来有些不太明白，<a href="http://docs.30c.org/djangobook2/" title="2.0" target="_blank" rel="external">djangobook</a>看了好几遍，现在总算是有点眉目了。<br>另外也零零散散的学习了一些html，css，javascript。毕竟现在互联网行业这么火热，多接触一些这方面的只是总是没错的。</p>
-<p>##憧憬<br>目标就不定了，总是觉得自己给自己的压力太大了，还是随性点。目前的状态还是挺好的，对于游戏也不是那么着迷，闲下来的时候还是会主动想看看书，学习学习。不一定非得做那1%，剩下的99%其实也挺好的。</p>
-<p>##最后<br>第一次尝试着写总结，写得比较乱，感觉都是些零碎的东西。打算从新的一年开始，每个月做一次简单的总结，平时学习到的东西也简单的总结，记录在这里，以后回头看看，说不定是另外一种体会。</p>
+          2014已经悄悄过去了，是时候对这一年做个总结了。2014年是崭新的一年，是毕业后第一个完整的工作年，在这一年里，许多想法都在发生着改变，也在尝试去接触许多新的知识。  
+##读书今年从8月份开始突然有了读书的习惯，看了许多书，但是却没有写过读书笔记，以后要养成写读书笔记的习惯。现在把今年读过的书简单罗列一下：
 
-          
+《1984》这本书在网上火得一塌糊涂，豆瓣评分也特别高，因此不得不尝试着去看看。说实话，看到大概一半的时候，我确实都不知道在讲些什么， 感觉一直是在营造一种比较黑暗，恐怖的氛围。看到温斯顿被洗脑时，那种无助，直到最后他也变得麻木起来。确实有些瘆得慌。
+《三国演义》这本书没什么好说的，以前一直想看，尝试了三次，都半途而废了，这次总算是看完了，算是如愿了。 夫英雄者，胸怀大志，腹有良谋，有包藏宇宙之机，吞吐天地之志者也。
+《一句顶一万句》这本书是在看 青年中国说 时，撒贝宁推荐的。讲了一些很简单的故事，刻画人物的心理。只能说是感同身受。也让我愈发坚定自己的想法，不管是交朋友，还是找对象，一定不能将就，一定要找对人。
+《head first python》这本书适合python入门
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/01/04/2014-annual-summary/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -528,7 +526,7 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">Zhao Junchi</p>
-            <p class="site-description motion-element" itemprop="description"></p>
+            <p class="site-description motion-element" itemprop="description">Only The Strong Survive</p>
         </div>
 
         <nav class="site-state motion-element">
@@ -550,10 +548,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -592,7 +590,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 &mdash; 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
