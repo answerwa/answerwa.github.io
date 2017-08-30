@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux_ntp | answerwa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景通过设置本地的ntpd服务，实现本地与服务器时间的同步。此文仅简单说明环境的搭建 NTP简介NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两台电脑的时钟同步化的网络协议。NTP使用UDP端口123作为传输层。它是用作抵销可变延迟的影响。 简单说明一下：NTP是一种协议；ntpd是系统中的服务，在linux下可以通过/sbin/service ntpd s">
+<meta name="keywords" content="linux,ntp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux_ntp">
+<meta property="og:url" content="https://answerwa.github.io/2015/03/05/linux-ntp/index.html">
+<meta property="og:site_name" content="answerwa">
+<meta property="og:description" content="背景通过设置本地的ntpd服务，实现本地与服务器时间的同步。此文仅简单说明环境的搭建 NTP简介NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两台电脑的时钟同步化的网络协议。NTP使用UDP端口123作为传输层。它是用作抵销可变延迟的影响。 简单说明一下：NTP是一种协议；ntpd是系统中的服务，在linux下可以通过/sbin/service ntpd s">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-05-28T04:08:06.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux_ntp">
+<meta name="twitter:description" content="背景通过设置本地的ntpd服务，实现本地与服务器时间的同步。此文仅简单说明环境的搭建 NTP简介NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两台电脑的时钟同步化的网络协议。NTP使用UDP端口123作为传输层。它是用作抵销可变延迟的影响。 简单说明一下：NTP是一种协议；ntpd是系统中的服务，在linux下可以通过/sbin/service ntpd s">
+  
+    <link rel="alternate" href="/atom.xml" title="answerwa" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">answerwa</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://answerwa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux-ntp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/05/linux-ntp/" class="article-date">
+  <time datetime="2015-03-05T12:08:16.000Z" itemprop="datePublished">2015-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux_ntp
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>通过设置本地的ntpd服务，实现本地与服务器时间的同步。<br>此文仅简单说明环境的搭建</p>
+<h2 id="NTP简介"><a href="#NTP简介" class="headerlink" title="NTP简介"></a>NTP简介</h2><p>NTP(Network Time Protocol)是一种网络时间协议。是以封包交换把两台电脑的时钟同步化的网络协议。NTP使用UDP端口123作为传输层。它是用作抵销可变延迟的影响。</p>
+<p>简单说明一下：NTP是一种协议；ntpd是系统中的服务，在linux下可以通过/sbin/service ntpd status或/etc/init.d/ntpd status来查看此服务的状态；ntpdate，ntpq，ntptrace等是一系列与ntp相关的命令。</p>
+<p>安装NTP： yum install ntp<br>一般系统上都会有ntp的包，可以提前通过rpm -qa | grep ntp查看机器上是否已经安装ntp。<br>服务操作说明：  </p>
+<blockquote>
+<p>/sbin/service ntpd start //启动服务<br>/sbin/service ntpd stop //关闭服务<br>/sbin/service ntpd restart //重启服务<br>/sbin/service ntpd status //查看服务状态  </p>
+</blockquote>
+<h2 id="ntpd服务设置"><a href="#ntpd服务设置" class="headerlink" title="ntpd服务设置"></a>ntpd服务设置</h2><p>ntpd服务的相关设置文件有以下5个：<br>1)/etc/ntp.conf<br>这个是NTP daemon的主要设文件，也是 NTP 唯一的设定文件。<br>2)/usr /share/zoneinfo/<br>在这个目录下的文件其实是规定了各主要时区的时间设定文件，例如北京地区的时区设定文件在/usr/share/zoneinfo/Asia/Beijing 就是了。这个目录里面的文件与底下要谈的两个文件(clock 与localtime)是有关系的。<br>3)/etc/sysconfig/clock<br>这个文件其实也不包含在NTP 的 daemon 当中，因为这个是 linux 的主要时区设定文件。每次开机后，Linux 会自动的读取这个文件来设定自己系统所默认要显示的时间。<br>4)/etc /localtime<br>这个文件就是“本地端的时间配置文件”。刚刚那个clock 文件里面规定了使用的时间设置文件(ZONE) 为 /usr/share/zoneinfo/Asia/Beijing ，所以说，这就是本地端的时间了，此时， Linux系统就会将Beijing那个文件另存为一份 /etc/localtime文件，所以未来我们的时间显示就会以Beijing那个时间设定文件为准。<br>5)/etc/timezone<br>系统时区文件</p>
+<p>其实主要用到的就只有/etc/ntp.conf，其它文件知道就行了。下面简单说一下/etc/ntp.conf文件的简单写法。<br>1)上层主机设定<br>server [IP | hostname] [prefer]<br>上层主机就是通过server来设定的，设定好上层主机，并保持ntpd服务处于启动状态，这样就能让本机与上层主机保持时间同步了。prefer参数是指当有多个上层主机时，主要通过指定了prefer的上层主机进行时间同步。<br>另外可以通过driftfile来指定用于记录与上层服务器联系时所花费的时间，默认为driftfile /var/lib/ntp/drift。<br>2)权限设定<br>权限设定主要是通过restrict来设定的，语法为：<br>restrict IP mask netmask_IP parameter<br>其中IP可以使具体值，也可以是ip段。netmask_IP是子网掩码。parameter有以下选项：  </p>
+<blockquote>
+<p>ignore：关闭所有的 NTP 联机服务<br>nomodify：表示 Client 端不能更改 Server 端的时间参数，不过，Client 端仍然可以透过 Server 端来进行网络校时。<br>notrust ：该 Client 除非通过认证，否则该 Client 来源将被视为不信任网域<br>noquery ：不提供 Client 端的时间查询<br>notrap ：不提供trap这个远程事件登入  </p>
+</blockquote>
+<p>ps:如果 paramter 完全没有设定，那就表示该 IP (或网域)“没有任何限制”<br>例如：<br>restrict 127.0.0.1　　　 #允许本机任意操作。<br>restrict 192.168.0.1 mask 255.255.255.0 nomodify  #局域网段内可以通过这台NTP Server进行时间同步，但是不能修改服务器时间。 </p>
+<p>另外还有一个fudge，具体如下：<br>fudge IP stratum number，这个设定一般是将自身作为服务器，因此IP一般为127段stratum后的number为服务器层数，最大为16。<br>默认为fudge 127.127.1.0 stratum 10</p>
+<p>其它设置值，建议保持系统默认值。</p>
+<h2 id="ntp时间同步"><a href="#ntp时间同步" class="headerlink" title="ntp时间同步"></a>ntp时间同步</h2><p>从ntpd服务设置中可以知道，设置好ntp.conf文件后，保持ntpd服务处于启动状态，机器就会与上层服务器进行时间同步了。现在主要介绍一些时间同步的命令。特别说明一下，想要通过命令进行时间同步时，需关闭ntpd服务。</p>
+<p>1)ntpdate IP<br>直接通过ntpdate加上想要进行时间同步的服务器IP，就能获得服务器上的时间，并设置到本机系统中。<br>2)rdate -s IP<br>与ntpdate类似，也是获得服务器上的时间，并设置到本机系统中。如果不加-s则仅是打印出服务器时间。 </p>
+<p>说明一下，这两条命令以及上面通过ntpd的时间同步，仅仅是将时间设置到了系统中，如果想要设置到硬件时钟中，还需要hwclock。<br>因此，如果想要设置本机的时间同步，可以将命令写入到crontab中，这样系统就会定期执行这两条命令实现时间同步了。不过通过查看网上资料，说是通过ntpdate来调节时间，时间会产生跃变，而通过ntpd服务来进行时间同步，是通过调节时钟频率渐变调节时间的。因此不推荐使用ntpdate + crontab来做时间同步。不过，在我测试时发现，ntpd服务进行时间同步时，也是通过跃变调节时间的。也有可能是我的设置有些问题(后来调查得知，需要在文件/etc/sysconfig/ntpd中加入-x 参数,变成: OPTIONS=”-U ntp -x -p /var/run/ntpd.pid”，这样ntpd就能实现渐变调整时间)。</p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>关于ntp的环境搭建是一件很复杂的事情，我也没有完全搞懂。这篇文章只是介绍了一些最简单的设置方法，通过这些设置，能够实现本地机器与服务器的时间同步。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://answerwa.github.io/2015/03/05/linux-ntp/" data-id="cj6z4pofp000cdcu72w3tsz7g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ntp/">ntp</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/05/linux-cron/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux_cron
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/04/something-20150304/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《断舍离》读后感</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntp/">ntp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pipe/">pipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/su/">su</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读后感/">读后感</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/ntp/" style="font-size: 10px;">ntp</a> <a href="/tags/pipe/" style="font-size: 10px;">pipe</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/su/" style="font-size: 10px;">su</a> <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/读后感/" style="font-size: 15px;">读后感</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/30/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/30/记一次 system() 引起的端口抢占/">记一次 system() 引起的端口抢占</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/04/network/">网络知识记录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/07/201503-annual-summary/">2015年3月终总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Zhao Junchi<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

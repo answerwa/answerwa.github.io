@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux_cron | answerwa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景前段时间由于工作需要，所以比较系统的调查了一下cron，现在总结分享一下。 crond简介crond是linux用来定期执行程序的服务。当安装完成操作系统之后，默认便会启动此服务。crond每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。而linux任务调度的工作主要分为以下两类：  系统执行的工作：系统周期性所要执行的工作，如备份系统数据、清理缓存。   个人执行的">
+<meta name="keywords" content="linux,cron">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux_cron">
+<meta property="og:url" content="https://answerwa.github.io/2015/03/05/linux-cron/index.html">
+<meta property="og:site_name" content="answerwa">
+<meta property="og:description" content="背景前段时间由于工作需要，所以比较系统的调查了一下cron，现在总结分享一下。 crond简介crond是linux用来定期执行程序的服务。当安装完成操作系统之后，默认便会启动此服务。crond每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。而linux任务调度的工作主要分为以下两类：  系统执行的工作：系统周期性所要执行的工作，如备份系统数据、清理缓存。   个人执行的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://images.cnitblog.com/blog/34483/201301/08090352-4e0aa3fe4f404b3491df384758229be1.png">
+<meta property="og:updated_time" content="2017-05-28T04:08:06.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux_cron">
+<meta name="twitter:description" content="背景前段时间由于工作需要，所以比较系统的调查了一下cron，现在总结分享一下。 crond简介crond是linux用来定期执行程序的服务。当安装完成操作系统之后，默认便会启动此服务。crond每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。而linux任务调度的工作主要分为以下两类：  系统执行的工作：系统周期性所要执行的工作，如备份系统数据、清理缓存。   个人执行的">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/34483/201301/08090352-4e0aa3fe4f404b3491df384758229be1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="answerwa" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">answerwa</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://answerwa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux-cron" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/05/linux-cron/" class="article-date">
+  <time datetime="2015-03-05T12:28:19.000Z" itemprop="datePublished">2015-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux_cron
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前段时间由于工作需要，所以比较系统的调查了一下cron，现在总结分享一下。</p>
+<h2 id="crond简介"><a href="#crond简介" class="headerlink" title="crond简介"></a>crond简介</h2><p>crond是linux用来定期执行程序的服务。当安装完成操作系统之后，默认便会启动此服务。crond每分钟会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。而linux任务调度的工作主要分为以下两类：</p>
+<ul>
+<li>系统执行的工作：系统周期性所要执行的工作，如备份系统数据、清理缓存。  </li>
+<li>个人执行的工作：某个用户定期要做的工作，例如每隔10分钟检查邮件服务器是否有新信，这些工作可由每个用户自行设置。</li>
+</ul>
+<p>特别说明一下：系统执行的工作是放在/etc/crontab中，而个人执行的工作是放在/var/spool/cron/user中。<br>另外说明一下：crond是linux的服务，crontab是命令。</p>
+<p>安装crontab：<br>yum install crontabs<br>服务操作说明：  </p>
+<blockquote>
+<p>/sbin/service crond start //启动服务<br>/sbin/service crond stop //关闭服务<br>/sbin/service crond restart //重启服务<br>/sbin/service crond reload //重新载入配置<br>/sbin/service crond status //查看服务状态  </p>
+</blockquote>
+<h2 id="使用权限"><a href="#使用权限" class="headerlink" title="使用权限"></a>使用权限</h2><p>控制crond的使用权限，主要是两个文件：  </p>
+<ul>
+<li>/etc/cron.allow  </li>
+<li>/etc/cron.deny  </li>
+</ul>
+<p>cron.allow的优先级比cron.deny的优先级高。也就是说当两个文件都存在时，首先根据cron.allow的内容进行判断。<br>当cron.allow存在时，要想使用crond服务，user必须在该文件中列出；当cron.allow不存在而cron.deny存在时，要想使用crond服务，user不能出现在该文件中；若两个文件都不存在，则只有root能使用crond服务。<br>因此，一般的使用情况是，不要cron.allow文件，放一个空的cron.deny文件在/etc下，这样所有用户都可以使用crond服务，若需要禁止某个用户使用，则可以直接在cron.deny文件中添加。</p>
+<h2 id="crontab命令详解"><a href="#crontab命令详解" class="headerlink" title="crontab命令详解"></a>crontab命令详解</h2><blockquote>
+<p>crontab [-u user] file (use file install user’s crontab)<br>crontab [-u user] -e (edit user’s crontab)<br>crontab [-u user] -l (list user’s crontab)<br>crontab [-u user] -r (delete user’s crontab)<br>crontab [-u user] -i (prompt before deleting user’s crontab）<br>crontab [-u user] -s (selinux context)  </p>
+</blockquote>
+<p>说明一下：当普通用户使用crontab命令时，是不需要也不能加[-u user]的，这个是给root使用的，root可以通过[-u user]操作其他用户的crontab。root用户查看自己的crontab也是不用加[-u root]的，当然你非要加也是可以的。</p>
+<h2 id="crontab具体使用-个人执行"><a href="#crontab具体使用-个人执行" class="headerlink" title="crontab具体使用(个人执行)"></a>crontab具体使用(个人执行)</h2><p>用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：</p>
+<p>minute   hour   day   month   week   command</p>
+<p>具体说明一下：</p>
+<p>首先各个字段用空格隔开。</p>
+<blockquote>
+<p>minute： 表示分钟，可以是从0到59之间的任何整数。<br>hour：表示小时，可以是从0到23之间的任何整数。<br>day：表示日期，可以是从1到31之间的任何整数。<br>month：表示月份，可以是从1到12之间的任何整数，当然也可以是英文缩写Jan、Feb等。<br>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日，必须也可以是单词缩写Sun、Mon等。<br>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。  </p>
+</blockquote>
+<p>在这里，很有必要盗用一张图片，很形象。</p>
+<p><img src="http://images.cnitblog.com/blog/34483/201301/08090352-4e0aa3fe4f404b3491df384758229be1.png" alt="cron.png" title="cron"></p>
+<p>举一个例子吧，比如要在每个月的15号和18号的早上7点到晚上23点之间，每隔两小时列出/etc目录下的文件：  </p>
+<blockquote>
+<p>* 7-23/2 <em> </em> * ls /etc  </p>
+<p>分析一下：  </p>
+<p>* 表示忽略，也就是都所有值都匹配<br>7-23/2 表示从23点到7点，每隔两小时<br>15,18 表示每个月的15号和18  </p>
+</blockquote>
+<h3 id="添加crontab文件"><a href="#添加crontab文件" class="headerlink" title="添加crontab文件"></a>添加crontab文件</h3><p>  一般情况下使用crontab -e这个命令，会通过编辑器打开crontab文件，然后按照上面提到的格式输入，一行代表一个周期性指令(ps:编辑器由环境变量$EDITOR指定)。</p>
+<p>  另外一个比较常用的方法是将想要写入crontab中的内容先写入另外一个文件中(比如cronfile)，再使用crontab cronfile，就能将cronfile中的内容替换到之前提到的/var/spool/cron/user中。</p>
+<p>  上面两个是比较常用的方法，再说说不太常用的方法：<br>  既然crontab的文件是/var/spool/cron/user，那么我们可以直接echo “<em> 23-7/2 </em> <em> </em> ls /etc” &gt; /var/spool/cron/user，当然，必须使用root权限才可以。</p>
+<p>  另外，还有一种方法就是echo “<em> 7-23/2 </em> <em> </em> ls /etc” | crontab，这种方法的原理其实与crontab cronfile相同。</p>
+<h3 id="列出crontab文件"><a href="#列出crontab文件" class="headerlink" title="列出crontab文件"></a>列出crontab文件</h3><p>  直接使用crontab -l，就能输出当前用户的crontab中的内容。顺带提一下，有时候，可能需要部分修改crontab中的内容，这时可以使用crontab -l &gt; cronfile，在cronfile中做出对应的修改，再使用crontab cronfile添加crontab文件。</p>
+<h3 id="删除crontab文件"><a href="#删除crontab文件" class="headerlink" title="删除crontab文件"></a>删除crontab文件</h3><p>  直接使用crontab -r，就能删除当前用户的crontab。</p>
+<h2 id="其它一些想说的"><a href="#其它一些想说的" class="headerlink" title="其它一些想说的"></a>其它一些想说的</h2><h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>  除了上面说的$EDITOR是用来指定打开crontab的编辑器以外，还想提到的是在crontab中执行脚本的问题。</p>
+<p>有时候想要在crontab中固定时间执行某个自己编写的脚本，可能会发现执行不成功，但是自己手动执行又是可以的，这个时候多半就是环境变量的问题了，需要修改一下crontab中的内容，在想要执行的脚本前，加上source ~/.bashrc，比如想要执行的脚本名为script，那么在crontab中就可以写为<em> 7-23/2 </em> <em> </em> source ~/.bashrc &amp;&amp; script</p>
+<h3 id="系统执行crontab"><a href="#系统执行crontab" class="headerlink" title="系统执行crontab"></a>系统执行crontab</h3><p>  前面也说的，crontab有系统执行和个人执行之分，文件存放的位置也不同，当然，写法有些差别，可以看看系统执行的crontab，也就是/etc/crontab。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SHELL=/bin/bash</div><div class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</div><div class="line">MAILTO=root</div><div class="line">HOME=/</div><div class="line"></div><div class="line"><span class="comment"># run-parts</span></div><div class="line">01 * * * * root run-parts /etc/cron.hourly</div><div class="line">02 4 * * * root run-parts /etc/cron.daily</div><div class="line">22 4 * * 0 root run-parts /etc/cron.weekly</div><div class="line">42 4 1 * * root run-parts /etc/cron.monthly</div></pre></td></tr></table></figure></p>
+<p>  与个人执行的crontab不同的是，首先指定了一些环境变量，其次多了root和run-parts两项。先说root，因为个人执行的crontab肯定是自己使用，因此不用指定这一项，而系统执行的crontab，需要指定是通过哪个用户来执行后面的指令的；对于run-parts，这个参数是执行后面指定的文件夹中的所有脚本，个人执行的crontab中，也是可以使用的。</p>
+<h3 id="邮件相关"><a href="#邮件相关" class="headerlink" title="邮件相关"></a>邮件相关</h3><p>  每次crontab执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此，将每条任务进行重定向处理非常重要。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://answerwa.github.io/2015/03/05/linux-cron/" data-id="cj6z4pofb0008dcu7w009l0a1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cron/">cron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/07/201503-annual-summary/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015年3月终总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/05/linux-ntp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux_ntp</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntp/">ntp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pipe/">pipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/su/">su</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读后感/">读后感</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/ntp/" style="font-size: 10px;">ntp</a> <a href="/tags/pipe/" style="font-size: 10px;">pipe</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/su/" style="font-size: 10px;">su</a> <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/读后感/" style="font-size: 15px;">读后感</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/30/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/30/记一次 system() 引起的端口抢占/">记一次 system() 引起的端口抢占</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/04/network/">网络知识记录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/07/201503-annual-summary/">2015年3月终总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Zhao Junchi<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

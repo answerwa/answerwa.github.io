@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>answerwa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="answerwa">
+<meta property="og:url" content="https://answerwa.github.io/page/2/index.html">
+<meta property="og:site_name" content="answerwa">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="answerwa">
+  
+    <link rel="alternate" href="/atom.xml" title="answerwa" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">answerwa</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://answerwa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux-pipe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/28/linux-pipe/" class="article-date">
+  <time datetime="2015-01-28T13:26:55.000Z" itemprop="datePublished">2015-01-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/28/linux-pipe/">linux_pipe</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="函数介绍"><a href="#函数介绍" class="headerlink" title="函数介绍"></a>函数介绍</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>create pipe，创建管道，包含在头文件 unistd.h 中，定义如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> pipefd[<span class="number">2</span>])</span></span>;</div></pre></td></tr></table></figure></p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>创建管道后，将文件描述词由参数pipefd数组返回。<br>pipefd[0]为管道的读取端；<br>pipefd[1]为管道的写入端。 </p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>成功创建后，返回0，错误则返回-1，并将错误原因写入errno中。</p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span></div><div class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> pipefd[<span class="number">2</span>];</div><div class="line">    <span class="keyword">pid_t</span> cpid;</div><div class="line">    <span class="keyword">char</span> buf;</div><div class="line"></div><div class="line">    assert(argc == <span class="number">2</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (pipe(pipefd) == <span class="number">-1</span>) &#123;</div><div class="line">        perror(<span class="string">"pipe"</span>);</div><div class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    cpid = fork();</div><div class="line">    <span class="keyword">if</span> (cpid == <span class="number">-1</span>) &#123;</div><div class="line">        perror(<span class="string">"fork"</span>);</div><div class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (cpid == <span class="number">0</span>) &#123;    <span class="comment">/* Child reads from pipe */</span></div><div class="line">        close(pipefd[<span class="number">1</span>]);          <span class="comment">/* Close unused write end */</span></div><div class="line"></div><div class="line">        <span class="keyword">while</span> (read(pipefd[<span class="number">0</span>], &amp;buf, <span class="number">1</span>) &gt; <span class="number">0</span>)</div><div class="line">            write(STDOUT_FILENO, &amp;buf, <span class="number">1</span>);</div><div class="line"></div><div class="line">        write(STDOUT_FILENO, <span class="string">"\n"</span>, <span class="number">1</span>);</div><div class="line">        close(pipefd[<span class="number">0</span>]);</div><div class="line">        _exit(EXIT_SUCCESS);</div><div class="line"></div><div class="line">    &#125; <span class="keyword">else</span> &#123;            <span class="comment">/* Parent writes argv[1] to pipe */</span></div><div class="line">        close(pipefd[<span class="number">0</span>]);          <span class="comment">/* Close unused read end */</span></div><div class="line">        write(pipefd[<span class="number">1</span>], argv[<span class="number">1</span>], <span class="built_in">strlen</span>(argv[<span class="number">1</span>]));</div><div class="line">        close(pipefd[<span class="number">1</span>]);          <span class="comment">/* Reader will see EOF */</span></div><div class="line">        wait(<span class="literal">NULL</span>);                <span class="comment">/* Wait for child */</span></div><div class="line">        <span class="built_in">exit</span>(EXIT_SUCCESS);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>补充说明一下：由于wait函数本身是有缺陷的，因此换成<strong>waitpid(cpid, NULL, 0)</strong>比较合适(此代码为manpage中例)。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://answerwa.github.io/2015/01/28/linux-pipe/" data-id="cj6z4poff0009dcu712mccw93" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pipe/">pipe</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-something-20150120" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/20/something-20150120/" class="article-date">
+  <time datetime="2015-01-20T15:02:40.000Z" itemprop="datePublished">2015-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/20/something-20150120/">《遇见未知的自己》读后感</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>花了大概一个礼拜时间，每天中午休息的时候把这本书看完了，怎么说呢，第一次接触这一类的书。感觉是比较唯心的。主张我们应该注重自己的内心，找到真我。书中一些看法还是比较认同的，大概说一下看完之后的印象吧。另外补充一点，现在愈发得觉得看电子书更方便了，在看到一些好的句子时，可以直接就勾画下来了。</p>
+<h2 id="对待事件"><a href="#对待事件" class="headerlink" title="对待事件"></a>对待事件</h2><p>事件本身来说是中立的，而由于每个人对待同一件事件的态度是不一样的，因此产生了不同的结果。<br>书中举的例子是：当儿媳妇回家看到婆婆脸色不好，这时就要看这个儿媳妇对婆婆的态度了。如果这个儿媳妇以前就认为这个婆婆不喜欢她，那么肯定就会认为婆婆是给她脸色看；否则应该就会认为婆婆可能是身体不好。这是一个简单的例子，但是确实也说明了一些道理。我自己还是比较认同。</p>
+<h2 id="对待事情"><a href="#对待事情" class="headerlink" title="对待事情"></a>对待事情</h2><p>书中主张将事情分为三种：老天的事，别人的事，自己的事。我们只需管好自己的事就好了。这个理论乍一看会觉得有一些自私。但是这一点我确实是很有感触的。<br>我记得高中的时候，老是喜欢去说教别人，学习上，生活上都是。从出发点来说，其实是关心别人，但是结果是，别人可能会觉得你装，而且不领情。所以后来我也一直坚持的一个观点就是，我首先做好我自己的事，别人的事，如果别人没让自己帮忙，就尽量不干涉。后来上大学了，看到宿舍就有人看到别人不学习，就去教育，结果两人还吵架，于是更加坚定自己的观点。因此这次看到书中这样写，就很有感触。<br>书中举的例子是女主人公去干涉老公的生活习惯，结果两人吵了一架。两人在一起其实也要注意交流方式。</p>
+<h2 id="对待后果"><a href="#对待后果" class="headerlink" title="对待后果"></a>对待后果</h2><p>对待已经发生的事情，最好的选择就是<strong>臣服</strong>，确实也是这样的，事情发生就不要再去纠结了，好好想想弥补的方法。虽然这本书是唯心的理论，但是这个主张，还是很理智的。  </p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>其实书中还有一个心想事成的理论，就是说，当你特别想得到某种东西，只要是你的能量足够大，那么宇宙中的能量就会和你产生共振，将这个东西带到你身边。这个就不是很认同了。不过书中也说了，也不可能说你什么都不干，每天空想就能得到什么。总是感觉有那么点别扭。其实我觉得看书也是这样的，不可能说全都接受书中的观点，也要选择性接受嘛。<br>另外，书中也多次提到要使用<strong>腹式呼吸</strong>，练习了半天，发现我平时就是用的这种呼吸方式嘛，汗~~~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://answerwa.github.io/2015/01/20/something-20150120/" data-id="cj6z4pogf000jdcu7nuf8uhlm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读后感/">读后感</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python3-python2-difference" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/13/python3-python2-difference/" class="article-date">
+  <time datetime="2015-01-13T15:21:46.000Z" itemprop="datePublished">2015-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/13/python3-python2-difference/">python3和python2的差别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。<br>由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到了，可以记录一下。<br>推荐一下<a href="http://www.liaoxuefeng.com/" title="廖学峰" target="_blank" rel="external">廖学峰老师的网站</a>，git和python都是在这个网站学习的。本篇博客可能会引用部分代码。</p>
+<h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><p>从python3开始，print变成了一个函数，因此最直观的说明就是，在使用它时，需要加括号了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">'there are test code'</span></div><div class="line">print(str)</div></pre></td></tr></table></figure></p>
+<p>格式化输出也是同样的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">i = <span class="number">3</span></div><div class="line">print(<span class="string">'this is the %dth blog'</span> % i)</div></pre></td></tr></table></figure></p>
+<p>ps：其实，简单说来，就是在python2的基础上，用括号把它包起来（个人理解）。</p>
+<h2 id="bytes-str"><a href="#bytes-str" class="headerlink" title="bytes str"></a>bytes str</h2><p>这是在学习socket时遇到的一个问题。主要是由于在python3中对文本和二进制数据作了明确的区分，文本总是Unicode，由str类型表示，二进制数据则由bytes类型表示。<br>在python2中，connect后，send时，是发送的字符串，代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure></p>
+<p>而在python3中，send时，需要发送bytes(<a href="https://docs.python.org/3/library/socket.html" title="socket" target="_blank" rel="external">socket.send(bytes[, flags])</a>),代码修改起来也比较简单，将’abc’改为b’abc’就可以了，代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> socket</div><div class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">s.connect((<span class="string">'www.sina.com.cn'</span>, <span class="number">80</span>))</div><div class="line">s.send(<span class="string">b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n'</span>)</div></pre></td></tr></table></figure></p>
+<p>当然，正规的方法肯定不是这样的，str与bytes的转换关系如下：</p>
+<blockquote>
+<p>str—–encode()—&gt;bytes<br>bytes—decode()—&gt;str  </p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>by1 = <span class="string">b'test'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(by1)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bytes</span>'&gt;</span></div><div class="line">&gt;&gt;&gt; str1 = by1.decode('utf-8')</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>str1</div><div class="line"><span class="string">'test'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(str1)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">str</span>'&gt;</span></div><div class="line">&gt;&gt;&gt; by2 = str1.encode('utf-8')</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>by2</div><div class="line"><span class="string">b'test'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(by2)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bytes</span>'&gt;</span></div></pre></td></tr></table></figure>
+<p>另外拓展一个<a href="http://www.ituring.com.cn/article/61192" target="_blank" rel="external">链接</a>吧。</p>
+<h2 id="图形编程-tkinter"><a href="#图形编程-tkinter" class="headerlink" title="图形编程 tkinter"></a>图形编程 tkinter</h2><p>这个目前用的不多，单纯记录一下：</p>
+<blockquote>
+<p>Tkinter → tkinter<br>tkMessageBox → tkinter.messagebox<br>tkColorChooser → tkinter.colorchooser<br>tkFileDialog → tkinter.filedialog<br>tkCommonDialog → tkinter.commondialog<br>tkSimpleDialog → tkinter.simpledialog<br>tkFont → tkinter.font<br>Tkdnd → tkinter.dnd<br>ScrolledText → tkinter.scrolledtext<br>Tix → tkinter.tix<br>ttk → tkinter.ttk  </p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://answerwa.github.io/2015/01/13/python3-python2-difference/" data-id="cj6z4pog6000gdcu72pprnzen" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2014-annual-summary" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/04/2014-annual-summary/" class="article-date">
+  <time datetime="2015-01-04T02:15:18.000Z" itemprop="datePublished">2015-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/04/2014-annual-summary/">2014年终总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2014已经悄悄过去了，是时候对这一年做个总结了。<br>2014年是崭新的一年，是毕业后第一个完整的工作年，在这一年里，许多想法都在发生着改变，也在尝试去接触许多新的知识。  </p>
+<p>##读书<br>今年从8月份开始突然有了读书的习惯，看了许多书，但是却没有写过读书笔记，以后要养成写读书笔记的习惯。现在把今年读过的书简单罗列一下：</p>
+<ul>
+<li><a href="http://www.duokan.com/book/45261" title="1984" target="_blank" rel="external">《1984》</a><br>这本书在网上火得一塌糊涂，豆瓣评分也特别高，因此不得不尝试着去看看。说实话，看到大概一半的时候，我确实都不知道在讲些什么， 感觉一直是在营造一种比较黑暗，恐怖的氛围。看到温斯顿被洗脑时，那种无助，直到最后他也变得麻木起来。确实有些瘆得慌。</li>
+<li><a href="http://www.duokan.com/book/426" title="三国演义" target="_blank" rel="external">《三国演义》</a><br>这本书没什么好说的，以前一直想看，尝试了三次，都半途而废了，这次总算是看完了，算是如愿了。 <strong>夫英雄者，胸怀大志，腹有良谋，有包藏宇宙之机，吞吐天地之志者也。</strong></li>
+<li><a href="http://www.duokan.com/book/73061" title="一句顶一万句" target="_blank" rel="external">《一句顶一万句》</a><br>这本书是在看 <strong>青年中国说</strong> 时，撒贝宁推荐的。讲了一些很简单的故事，刻画人物的心理。只能说是感同身受。也让我愈发坚定自己的想法，不管是交朋友，还是找对象，一定不能将就，一定要找对人。</li>
+<li><a href="http://book.douban.com/subject/10561367" title="head first python" target="_blank" rel="external">《head first python》</a><br>这本书适合python入门后看。不过后小半部分的东西感觉讲的不是很清楚。  </li>
+<li><a href="http://book.douban.com/subject/21317828/" title="征服C指针" target="_blank" rel="external">《征服C指针》</a></li>
+<li><a href="http://billie66.github.io/TLCL/book/zh/" title="TLCL" target="_blank" rel="external">《the linux command line》</a><br>这两本书都没看完。。。</li>
+</ul>
+<p>##语言<br>今年新学了python，学得还是挺起劲的，因此准备长期学习下去，同时也接触了django，但是由于从来都没有接触过这方面的知识，因此学习起来有些不太明白，<a href="http://docs.30c.org/djangobook2/" title="2.0" target="_blank" rel="external">djangobook</a>看了好几遍，现在总算是有点眉目了。<br>另外也零零散散的学习了一些html，css，javascript。毕竟现在互联网行业这么火热，多接触一些这方面的只是总是没错的。</p>
+<p>##憧憬<br>目标就不定了，总是觉得自己给自己的压力太大了，还是随性点。目前的状态还是挺好的，对于游戏也不是那么着迷，闲下来的时候还是会主动想看看书，学习学习。不一定非得做那1%，剩下的99%其实也挺好的。</p>
+<p>##最后<br>第一次尝试着写总结，写得比较乱，感觉都是些零碎的东西。打算从新的一年开始，每个月做一次简单的总结，平时学习到的东西也简单的总结，记录在这里，以后回头看看，说不定是另外一种体会。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://answerwa.github.io/2015/01/04/2014-annual-summary/" data-id="cj6z4poel0001dcu7qxnk14a6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cron/">cron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntp/">ntp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pipe/">pipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/su/">su</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读后感/">读后感</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/ntp/" style="font-size: 10px;">ntp</a> <a href="/tags/pipe/" style="font-size: 10px;">pipe</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/su/" style="font-size: 10px;">su</a> <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/读后感/" style="font-size: 15px;">读后感</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/30/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/30/记一次 system() 引起的端口抢占/">记一次 system() 引起的端口抢占</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/04/network/">网络知识记录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/07/201503-annual-summary/">2015年3月终总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Zhao Junchi<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
