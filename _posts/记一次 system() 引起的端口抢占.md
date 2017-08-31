@@ -1,5 +1,7 @@
-# 记一次 system() 引起的端口抢占
-
+title: 记一次 system() 引起的端口抢占
+date: 2017-08-30 22:12:17
+tags: 总结
+---
 ## 写在前面
 
 在写代码时，难免需要调用别的命令获取一些信息，这时可以用`popen()`拿到需要的信息；有时又需要启动其他服务，这时可能会用`system()`直接调用启动该服务的命令。这次要说的，就是用`system()`函数调用 daemon 进程可能会引起的问题。
@@ -42,7 +44,7 @@
 
 写了两个小程序 process_A 和 process_B，在 process_A 中监听了 5081 端口，然后通过`system()`调用 process_B，这时查看 process_B 如果拥有和 process_A 同样的 socket 就可以验证上述结论。然后再杀掉 process_A 如果此时 process_B 抢占 5081 端口则进一步验证上述结论。
 
-
+需分别编译成 process_A 和 process_B。
 
 process_A代码如下：
 
