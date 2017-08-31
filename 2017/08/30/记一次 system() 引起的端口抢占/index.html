@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="answerwa">
 <meta property="og:description" content="写在前面在写代码时，难免需要调用别的命令获取一些信息，这时可以用popen()拿到需要的信息；有时又需要启动其他服务，这时可能会用system()直接调用启动该服务的命令。这次要说的，就是用system()函数调用 daemon 进程可能会引起的问题。 现象描述最近在项目中加入了一个程序A，监听 5081 端口，用于设备间通信。当收到特定的消息时，就会通过 rsync 将指定设备的一些文件拷贝到本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-30T14:39:52.031Z">
+<meta property="og:updated_time" content="2017-08-31T14:12:39.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次 system() 引起的端口抢占">
 <meta name="twitter:description" content="写在前面在写代码时，难免需要调用别的命令获取一些信息，这时可以用popen()拿到需要的信息；有时又需要启动其他服务，这时可能会用system()直接调用启动该服务的命令。这次要说的，就是用system()函数调用 daemon 进程可能会引起的问题。 现象描述最近在项目中加入了一个程序A，监听 5081 端口，用于设备间通信。当收到特定的消息时，就会通过 rsync 将指定设备的一些文件拷贝到本">
@@ -147,6 +147,15 @@
 
 
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-105709403-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
 
 
@@ -244,7 +253,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhao Junchi">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/cristiano.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -326,6 +335,7 @@
 </blockquote>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>通过上面关于<code>system()</code>和<code>fork()</code>的分析，可以知道，问题产生的原因，就是我在A进程中打开了 5081 端口的 socket，然后在通过<code>system()</code>重启B，C，D进程的时候，B，C，D进程作为A进程的子进程，复制了 5081 端口的 socket，因此可能会发生抢占 5081 端口的情况。</p>
 <h3 id="问题复现"><a href="#问题复现" class="headerlink" title="问题复现"></a>问题复现</h3><p>写了两个小程序 process_A 和 process_B，在 process_A 中监听了 5081 端口，然后通过<code>system()</code>调用 process_B，这时查看 process_B 如果拥有和 process_A 同样的 socket 就可以验证上述结论。然后再杀掉 process_A 如果此时 process_B 抢占 5081 端口则进一步验证上述结论。</p>
+<p>需分别编译成 process_A 和 process_B。</p>
 <p>process_A代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;strings.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYNC_SERVER_PORT    5081</span></div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> g_sockfd;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">init_socket</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">server</span>;</span></div><div class="line">    <span class="keyword">int</span> sockfd;</div><div class="line"></div><div class="line">    sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);</div><div class="line">    <span class="keyword">if</span> (sockfd &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Creating socket failed.\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    bzero(&amp;server, <span class="keyword">sizeof</span>(server));</div><div class="line">    server.sin_family = AF_INET;</div><div class="line">    server.sin_port = htons(SYNC_SERVER_PORT);</div><div class="line">    server.sin_addr.s_addr = htonl(INADDR_ANY);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (bind(sockfd, (struct sockaddr *)&amp;server, <span class="keyword">sizeof</span>(struct sockaddr))\</div><div class="line">        == <span class="number">-1</span>) &#123;</div><div class="line"></div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Bind error.\n"</span>);</div><div class="line">        <span class="keyword">goto</span> error;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> sockfd;</div><div class="line"></div><div class="line">error:</div><div class="line">    close(sockfd);</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">process_exit</span><span class="params">(<span class="keyword">int</span> signal)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"process exit.\n"</span>);</div><div class="line">    <span class="keyword">if</span>(g_sockfd &gt; <span class="number">0</span>) &#123;</div><div class="line">        close(g_sockfd);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    g_sockfd = init_socket();</div><div class="line">    <span class="keyword">if</span>(g_sockfd &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"init socket failed.\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    signal(SIGKILL,&amp;process_exit);</div><div class="line">    signal(SIGINT,&amp;process_exit);</div><div class="line"></div><div class="line">    system(<span class="string">"./process_B &amp;"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</div><div class="line">        sleep(<span class="number">10</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>process_B代码如下：</p>
@@ -437,6 +447,10 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/cristiano.jpg"
+              alt="Zhao Junchi" />
           
             <p class="site-author-name" itemprop="name">Zhao Junchi</p>
             <p class="site-description motion-element" itemprop="description">Only The Strong Survive</p>
