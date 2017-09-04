@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>answerwa</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://answerwa.github.io/"/>
+  <updated>2017-08-31T14:12:39.099Z</updated>
+  <id>https://answerwa.github.io/</id>
+  
+  <author>
+    <name>Zhao Junchi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次 system() 引起的端口抢占</title>
+    <link href="https://answerwa.github.io/2017/08/30/%E8%AE%B0%E4%B8%80%E6%AC%A1%20system()%20%E5%BC%95%E8%B5%B7%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%8A%A2%E5%8D%A0/"/>
+    <id>https://answerwa.github.io/2017/08/30/记一次 system() 引起的端口抢占/</id>
+    <published>2017-08-30T14:12:17.000Z</published>
+    <updated>2017-08-31T14:12:39.099Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;在写代码时，难免需要调用别的命令获取一些信息，这时可以用&lt;code&gt;popen()&lt;/code&gt;拿到需要的信息；有时又需要启
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="https://answerwa.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络知识记录</title>
+    <link href="https://answerwa.github.io/2015/05/04/network/"/>
+    <id>https://answerwa.github.io/2015/05/04/network/</id>
+    <published>2015-05-04T09:12:14.000Z</published>
+    <updated>2017-05-28T04:08:06.232Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这段时间接触到了好多网络方面的知识，都是些基础知识，不知道就是不知道，因此不得不在平时多多补充网络方面的知识。&lt;/p&gt;
+&lt;p&gt;现在把平时新学到的知识记录在这里。&lt;/p&gt;
+&lt;h2 id=&quot;域名和别名&quot;&gt;&lt;a href=&quot;#域名和别名&quot; class=&quot;headerlink&quot; t
+    
+    </summary>
+    
+    
+      <category term="network" scheme="https://answerwa.github.io/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2015年3月终总结</title>
+    <link href="https://answerwa.github.io/2015/04/07/201503-annual-summary/"/>
+    <id>https://answerwa.github.io/2015/04/07/201503-annual-summary/</id>
+    <published>2015-04-07T10:15:37.000Z</published>
+    <updated>2017-05-28T04:08:06.179Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天离职了，没有像想象中那么开心，毕竟是离开了一个熟悉的环境。虽然是打算回家乡发展，但是心里面还是有些不舍。和前一个离职的同事聊天的时候，她问我有没有不舍，说她离职的时候也很舍不得，都快哭了。我说 &lt;em&gt;挺舍不得的，但是应该不是舍不得这个公司，而是因为从熟悉的环境变动到陌
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="https://answerwa.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux_cron</title>
+    <link href="https://answerwa.github.io/2015/03/05/linux-cron/"/>
+    <id>https://answerwa.github.io/2015/03/05/linux-cron/</id>
+    <published>2015-03-05T12:28:19.000Z</published>
+    <updated>2017-05-28T04:08:06.208Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;前段时间由于工作需要，所以比较系统的调查了一下cron，现在总结分享一下。&lt;/p&gt;
+&lt;h2 id=&quot;crond简介&quot;&gt;&lt;a href=&quot;#c
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://answerwa.github.io/tags/linux/"/>
+    
+      <category term="cron" scheme="https://answerwa.github.io/tags/cron/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux_ntp</title>
+    <link href="https://answerwa.github.io/2015/03/05/linux-ntp/"/>
+    <id>https://answerwa.github.io/2015/03/05/linux-ntp/</id>
+    <published>2015-03-05T12:08:16.000Z</published>
+    <updated>2017-05-28T04:08:06.213Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;通过设置本地的ntpd服务，实现本地与服务器时间的同步。&lt;br&gt;此文仅简单说明环境的搭建&lt;/p&gt;
+&lt;h2 id=&quot;NTP简介&quot;&gt;&lt;a hre
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://answerwa.github.io/tags/linux/"/>
+    
+      <category term="ntp" scheme="https://answerwa.github.io/tags/ntp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《断舍离》读后感</title>
+    <link href="https://answerwa.github.io/2015/03/04/something-20150304/"/>
+    <id>https://answerwa.github.io/2015/03/04/something-20150304/</id>
+    <published>2015-03-04T13:08:27.000Z</published>
+    <updated>2017-05-28T04:08:06.248Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在知乎上看到有人推荐这本书，所以就去下了个pdf(额额~~应该尊重作者，注意版权)，塞进pad，每天中午休息的时候随便看看。这一类的书看多少遍都是没用的，关键还是要自己行动起来，“整理”东西(这里的整理打引号是因为作者在书中重新定义了整理二字)。&lt;br&gt;书中说有三种扔不掉东
+    
+    </summary>
+    
+    
+      <category term="读后感" scheme="https://answerwa.github.io/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>su和su -</title>
+    <link href="https://answerwa.github.io/2015/02/03/linux-su-su/"/>
+    <id>https://answerwa.github.io/2015/02/03/linux-su-su/</id>
+    <published>2015-02-03T14:39:22.000Z</published>
+    <updated>2017-05-28T04:08:06.226Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天晚上突然发现，用普通用户通过putty登陆后，su到root，好多命令没有。。。而且切换到/root目录下source .bashrc和.bash_profile都没有用。&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cl
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://answerwa.github.io/tags/linux/"/>
+    
+      <category term="su" scheme="https://answerwa.github.io/tags/su/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2015年1月终总结</title>
+    <link href="https://answerwa.github.io/2015/02/01/201501-annual-summary/"/>
+    <id>https://answerwa.github.io/2015/02/01/201501-annual-summary/</id>
+    <published>2015-02-01T14:33:10.000Z</published>
+    <updated>2017-05-28T04:08:06.172Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;没想到一月份也这么快过去了。从新年开始写让自己学会总结，把平时的学到的，想到的，都要及时记录下来。确实现在也认识到这个问题了，不管是学习，工作还是生活，总结确实是很难，但是真正收获最多的，就是在自己总结的时候。  &lt;/p&gt;
+&lt;h2 id=&quot;学习&quot;&gt;&lt;a href=&quot;#学习&quot;
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="https://answerwa.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux_pipe</title>
+    <link href="https://answerwa.github.io/2015/01/28/linux-pipe/"/>
+    <id>https://answerwa.github.io/2015/01/28/linux-pipe/</id>
+    <published>2015-01-28T13:26:55.000Z</published>
+    <updated>2017-05-28T04:08:06.218Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;函数介绍&quot;&gt;&lt;a href=&quot;#函数介绍&quot; class=&quot;headerlink&quot; title=&quot;函数介绍&quot;&gt;&lt;/a&gt;函数介绍&lt;/h2&gt;&lt;h3 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://answerwa.github.io/tags/linux/"/>
+    
+      <category term="pipe" scheme="https://answerwa.github.io/tags/pipe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《遇见未知的自己》读后感</title>
+    <link href="https://answerwa.github.io/2015/01/20/something-20150120/"/>
+    <id>https://answerwa.github.io/2015/01/20/something-20150120/</id>
+    <published>2015-01-20T15:02:40.000Z</published>
+    <updated>2017-05-28T04:08:06.243Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;花了大概一个礼拜时间，每天中午休息的时候把这本书看完了，怎么说呢，第一次接触这一类的书。感觉是比较唯心的。主张我们应该注重自己的内心，找到真我。书中一些看法还是比较认同的，大概说一下看完之后的印象吧。另外补充一点，现在愈发得觉得看电子书更方便了，在看到一些好的句子时，可以直
+    
+    </summary>
+    
+    
+      <category term="读后感" scheme="https://answerwa.github.io/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python3和python2的差别</title>
+    <link href="https://answerwa.github.io/2015/01/13/python3-python2-difference/"/>
+    <id>https://answerwa.github.io/2015/01/13/python3-python2-difference/</id>
+    <published>2015-01-13T15:21:46.000Z</published>
+    <updated>2017-05-28T04:08:06.238Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习python已经有段时间了，断断续续的，但是基本上每天也会多多少少看看。&lt;br&gt;由于学的是python3，因此经常都会遇到一些兼容性的问题。其实也不可能说一直盯着官方文档看完，所以还是遇到问题后再解决，但是好多都是当时遇到查一下，解决了就忘了，今天新开一篇博客，以后遇到
+    
+    </summary>
+    
+    
+      <category term="python" scheme="https://answerwa.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2014年终总结</title>
+    <link href="https://answerwa.github.io/2015/01/04/2014-annual-summary/"/>
+    <id>https://answerwa.github.io/2015/01/04/2014-annual-summary/</id>
+    <published>2015-01-04T02:15:18.000Z</published>
+    <updated>2017-05-28T04:08:06.167Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2014已经悄悄过去了，是时候对这一年做个总结了。&lt;br&gt;2014年是崭新的一年，是毕业后第一个完整的工作年，在这一年里，许多想法都在发生着改变，也在尝试去接触许多新的知识。  &lt;/p&gt;
+&lt;p&gt;##读书&lt;br&gt;今年从8月份开始突然有了读书的习惯，看了许多书，但是却没有写过读
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="https://answerwa.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+</feed>
